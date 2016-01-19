@@ -1,0 +1,31 @@
+Name:           haskell-reals-comparison
+Version:        0.1
+Cabal-Version:  >= 1.8
+Build-Type:     Simple
+License:        BSD3
+License-File:   LICENCE
+Author:         Michal Konecny (Aston University)
+Copyright:      (c) 2015 Michal Konecny
+Maintainer:     mikkonecny@gmail.com
+Stability:      experimental
+Category:       Data, Math
+Synopsis:       compare Haskell exact real number implementations
+Tested-with:    GHC==7.8.4
+Description:    Compare Haskell exact real number implementations.
+
+executable haskell-reals-comparison
+  build-depends:   
+        base >= 4,
+        aern2-num == 0.1,
+        exact-real,
+        ireal
+  hs-source-dirs:  src
+  ghc-options:     -O2 -Wall -rtsopts
+  extensions:       
+                    OverloadedStrings, 
+                    RebindableSyntax
+  other-modules: 
+                 Tasks.AERN2Ops,
+                 Tasks.PreludeOps
+  main-is: Main.hs
+
