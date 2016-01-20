@@ -3,10 +3,14 @@ module Main where
 
 import Prelude
 import Data.String (fromString)
+import Control.Exception
 
 import Data.Number.IReal (IReal) -- package ireal
 --import Data.CReal (CReal) -- package exact-real
-import qualified AERN2.Num as ANum (CauchyReal, MPBall, bits, rational2BallP, cauchyReal, iterateUntilAccurate)
+import qualified AERN2.Num as ANum 
+    (CauchyReal, cauchyReal, 
+     getAccuracy, bits,
+     MPBall, rational2BallP, iterateUntilAccurate)
 --import qualified AERN2.Net as ANet ()
 
 import qualified Tasks.PreludeOps as TP
@@ -68,16 +72,22 @@ bench benchArg implArg =
     
 taskLogistic0MP :: Maybe ANum.MPBall
 taskLogistic0MP =
-    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (100 :: Integer)) $ \p ->
-        TA.taskLogistic0 (ANum.rational2BallP p TA.taskLogistic0x0)
+    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ \p ->
+        TA.taskLogistic0WithHook checkAccuracy (ANum.rational2BallP p TA.taskLogistic0x0)
     
+    
+checkAccuracy :: ANum.MPBall -> ANum.MPBall
+checkAccuracy ball 
+    | ANum.getAccuracy ball < (ANum.bits 50)  = throw LossOfPrecision 
+    | otherwise = ball 
+
 taskLogistic1MP :: Maybe ANum.MPBall
 taskLogistic1MP =
-    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (100 :: Integer)) $ \p ->
-        TA.taskLogistic1 (ANum.rational2BallP p TA.taskLogistic1x0)
+    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ \p ->
+        TA.taskLogistic1WithHook checkAccuracy (ANum.rational2BallP p TA.taskLogistic1x0)
     
 taskLogistic2MP :: Maybe ANum.MPBall
 taskLogistic2MP =
-    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (100 :: Integer)) $ \p ->
-        TA.taskLogistic2 (ANum.rational2BallP p TA.taskLogistic2x0)
+    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ \p ->
+        TA.taskLogistic2WithHook checkAccuracy (ANum.rational2BallP p TA.taskLogistic2x0)
         
