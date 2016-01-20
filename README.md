@@ -19,14 +19,22 @@ The benchmarks have been compiled using ghc-7.8.4 with -O2.
 
 Each benchmark has been executed 3 times in a row and the timing has been stable.
 
-### Results
+### Implementations
 
-| Implementation | Language | Status | logistic0 (n=100) | logistic1 (n=1000)  | logistic2 (n=10000)  |
-| -------------- | ------ | ------------ | ---- | --------- | --------- |
-| [ireal](https://hackage.haskell.org/package/ireal), IReal, Floating instance | pure Haskell | fairly complete, on Hackage, 2015-10-31 | 0.04 s | 19.8 s | > 10 min |
-| [aern2](https://github.com/michalkonecny/aern2), CauchyReal, Floating instance | [haskell-mpfr](https://github.com/comius/haskell-mpfr) | experimental, on GitHub, 2016-01-20 | 0.07 s | 8.7 s | > 10 min |
-| [aern2](https://github.com/michalkonecny/aern2), CauchyReal, ArrowReal instance | [haskell-mpfr](https://github.com/comius/haskell-mpfr) | experimental, on GitHub, 2016-01-20 | 0.01 s | 0.06 s | 3.2 s |
-| [aern2](https://github.com/michalkonecny/aern2), iRRAM-style MPBall, ArrowReal instance | [haskell-mpfr](https://github.com/comius/haskell-mpfr) | experimental, on GitHub, 2016-01-20 | 0.01 s | 0.09 s | 5.0 s |
+| Implementation | Notable dependencies | Status | Reliability | Release date of the version used here |
+| -------------- | ------ | --------- |
+| [ireal](https://hackage.haskell.org/package/ireal) | _(pure Haskell)_ | fairly complete, on Hackage | well tested | 2015-10-31 |
+| [aern2](https://github.com/michalkonecny/aern2) | [haskell-mpfr](https://github.com/comius/haskell-mpfr) | experimental, on GitHub | not tested yet | 2016-01-20 |
+
+
+### Benchmark results
+
+| Implementation | real data type | logistic0 (n=100) | logistic1 (n=1000)  | logistic2 (n=10000)  |
+| -------- | ------ | ---- | ---- | ---- |
+| ireal | IReal, Floating operations | 0.04 s | 19.8 s | > 10 min |
+| aern2 | CauchyReal, Floating operations | 0.07 s | 8.7 s | > 10 min |
+| aern2 | CauchyReal, ArrowReal operations | 0.01 s | 0.06 s | 3.2 s |
+| aern2 | iRRAM-style MPBall, ArrowReal operations | 0.01 s | 0.09 s | 5.0 s |
 
 ### TODO
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)
