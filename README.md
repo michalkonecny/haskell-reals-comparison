@@ -2,7 +2,7 @@
 
 __A comparison of Haskell exact real number implementations__
 
-_This is a work in progress._
+_This is work in progress._
 
 The source of the benchmark tasks:  
 * [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base-4.8.1.0/docs/Prelude.html#t:Floating) instance
