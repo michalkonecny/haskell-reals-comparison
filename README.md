@@ -22,7 +22,7 @@ Each benchmark has been executed 3 times in a row and the timing has been stable
 ### Implementations
 
 | Implementation | Notable dependencies | Status | Reliability | Release date of the version used here |
-| -------------- | ------ | --------- |
+| ----- | ----- | ----- | ----- | ----- |
 | [ireal](https://hackage.haskell.org/package/ireal) | _(pure Haskell)_ | fairly complete, on Hackage | well tested | 2015-10-31 |
 | [aern2](https://github.com/michalkonecny/aern2) | [haskell-mpfr](https://github.com/comius/haskell-mpfr) | experimental, on GitHub | not tested yet | 2016-01-20 |
 
