@@ -29,8 +29,8 @@ Each benchmark has been executed 3 times in a row and the timing has been stable
 
 ### Benchmark results
 
-| Implementation | real data type | logistic0 (n=100) | logistic1 (n=1000)  | logistic2 (n=10000)  | logistic2 (n=100000)  |
-| -------- | ------ | ---- | ---- | ---- |
+| Implementation | real data type | logistic0 (n=100) | logistic1 (n=1000)  | logistic2 (n=10000)  | logistic2 (n=100000) |
+| -------- | ------ | ---- | ---- | ---- | ---- |
 | ireal | IReal, Floating operations | 0.04 s | 19.8 s / 19 MB | > 10 min | > 10 min |
 | aern2 | CauchyReal, Floating operations | 0.01 s | 0.06 s / 12 MB | 3.4 s / 211 MB | > 2GB |
 | aern2 | CauchyReal, ArrowReal operations | 0.01 s | 0.06 s / 12 MB | 2.8 s / 253 MB | > 2GB |
