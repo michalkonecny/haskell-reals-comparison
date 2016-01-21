@@ -3,52 +3,30 @@ module Tasks.AERN2Ops where
 
 import AERN2.Num
 import Control.Category
---import Control.Arrow
+import Control.Arrow
+import Tasks.PreludeOps (standardC)
 
-logisticWithHookA :: (ArrowReal to r) => (r `to` r) -> Rational -> Integer -> r `to` r
+logisticWithHookA :: (ArrowReal to r) => (r `to` Maybe r) -> Rational -> Integer -> r `to` Maybe r
 logisticWithHookA hook c n =
-    (foldl1 (<<<) (replicate (int n) step)) 
+    (foldl1 (<<<) (replicate (int n) step)) <<< arr Just 
     where
---    cR = cauchyReal c -- using cR instead of c below causes a massive slow-down 
-    step = $(exprA[|let [x]=vars in  c * x * (1 - x)|]) >>> hook
+    step =
+        proc maybeX ->
+            case maybeX of
+                Nothing -> returnA -< Nothing
+                Just x -> 
+                    hook <<< $(exprA[|let [x]=vars in  c * x * (1 - x)|]) -< x
     
-standardC :: Rational
-standardC = 3.8203125
-    
-taskLogistic0WithHook :: ArrowReal to r => r `to` r -> r `to` r
-taskLogistic0WithHook hook = logisticWithHookA hook standardC 100
+taskLogisticWithHook :: ArrowReal to r => Integer -> r `to` Maybe r -> r `to` Maybe r
+taskLogisticWithHook n hook = logisticWithHookA hook standardC n
 
-taskLogistic0 :: ArrowReal to r => r `to` r
-taskLogistic0 = taskLogistic0WithHook id
+taskLogistic :: ArrowReal to r => Integer -> r `to` r
+taskLogistic n = 
+    proc x -> 
+        do 
+        (Just r) <- taskLogisticWithHook n (arr Just) -< x
+        returnA -< r 
 
-taskLogistic0x0 :: Rational
-taskLogistic0x0 = 0.125     
-    
-taskLogistic1WithHook :: ArrowReal to r => r `to` r -> r `to` r
-taskLogistic1WithHook hook = logisticWithHookA hook standardC 1000
-
-taskLogistic1 :: ArrowReal to r => r `to` r
-taskLogistic1 = taskLogistic1WithHook id
-
-taskLogistic1x0 :: Rational
-taskLogistic1x0 = 0.125     
-    
-    
-taskLogistic2WithHook :: ArrowReal to r => r `to` r -> r `to` r
-taskLogistic2WithHook hook = logisticWithHookA hook standardC 10000
-
-taskLogistic2 :: ArrowReal to r => r `to` r
-taskLogistic2 = taskLogistic2WithHook id
-
-taskLogistic2x0 :: Rational
-taskLogistic2x0 = 0.125     
-    
-taskLogistic3WithHook :: ArrowReal to r => r `to` r -> r `to` r
-taskLogistic3WithHook hook = logisticWithHookA hook standardC 100000
-
-taskLogistic3 :: ArrowReal to r => r `to` r
-taskLogistic3 = taskLogistic3WithHook id
-
-taskLogistic3x0 :: Rational
-taskLogistic3x0 = 0.125     
+taskLogistic_x0 :: Rational
+taskLogistic_x0 = 0.125     
     
