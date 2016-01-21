@@ -38,6 +38,8 @@ bench benchArg implArg =
                 TP.taskLogistic1Description
             "logistic2" ->
                 TP.taskLogistic2Description
+            "logistic3" ->
+                TP.taskLogistic3Description
             _ ->
                 error $ "unknown benchmark: " ++ benchArg
     resultDecription =
@@ -66,6 +68,14 @@ bench benchArg implArg =
                     "aern2_CR_aern2Ops" -> show (TA.taskLogistic2 (ANum.cauchyReal TA.taskLogistic2x0))
                     "aern2_MP_aern2Ops" -> show (taskLogistic2MP)
                     _ -> error $ "unknown implementation: " ++ implArg
+            "logistic3" -> 
+                case implArg of
+                    "ireal" -> show (TP.taskLogistic3 :: IReal)
+--                    "exact-real" -> show (TP.taskLogistic3 :: CReal 100)
+                    "aern2_CR_preludeOps" -> show (TP.taskLogistic3 :: ANum.CauchyReal)
+                    "aern2_CR_aern2Ops" -> show (TA.taskLogistic3 (ANum.cauchyReal TA.taskLogistic3x0))
+                    "aern2_MP_aern2Ops" -> show (taskLogistic3MP)
+                    _ -> error $ "unknown implementation: " ++ implArg
             _ ->
                 error $ "unknown benchmark: " ++ benchArg
      
@@ -90,4 +100,9 @@ taskLogistic2MP :: Maybe ANum.MPBall
 taskLogistic2MP =
     snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ \p ->
         TA.taskLogistic2WithHook checkAccuracy (ANum.rational2BallP p TA.taskLogistic2x0)
+    
+taskLogistic3MP :: Maybe ANum.MPBall
+taskLogistic3MP =
+    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ \p ->
+        TA.taskLogistic3WithHook checkAccuracy (ANum.rational2BallP p TA.taskLogistic3x0)
         
