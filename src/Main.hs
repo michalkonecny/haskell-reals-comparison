@@ -3,7 +3,7 @@ module Main where
 
 import Prelude
 import Data.String (fromString)
-import Control.Exception
+--import Control.Exception
 
 import Data.Number.IReal (IReal) -- package ireal
 --import Data.CReal (CReal) -- package exact-real
@@ -39,7 +39,7 @@ bench benchArg implArg =
             _ ->
                 error $ "unknown benchmark: " ++ benchArg
         where
-        logisticAux n = ("logistic", [n],  TP.taskLogisticDescription n)
+        logisticAux n = ("logistic"  :: String, [n],  TP.taskLogisticDescription n)
     resultDecription =
         case (benchName, benchParams) of
             ("logistic", [n]) -> 
@@ -47,16 +47,32 @@ bench benchArg implArg =
                     "ireal" -> show (TP.taskLogistic n :: IReal)
 --                    "exact-real" -> show (TP.taskLogistic n :: CReal 100)
                     "aern2_CR_preludeOps" -> show (TP.taskLogistic n :: ANum.CauchyReal)
-                    "aern2_CR_aern2Ops" -> show (TA.taskLogistic n (ANum.cauchyReal TA.taskLogistic_x0))
-                    "aern2_MP_aern2Ops" -> show (taskLogisticMP n)
+                    "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n)
+                    "aern2_CR_aern2Ops" -> show (TA.taskLogistic n (ANum.cauchyReal (TP.taskLogistic_x0 :: Rational)))
+                    "aern2_MP_aern2Ops" -> show (taskLogisticMP_TA n)
                     _ -> error $ "unknown implementation: " ++ implArg
             _ -> error ""
      
     
-taskLogisticMP :: Integer -> Maybe ANum.MPBall
-taskLogisticMP n =
-    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ \p ->
-        TA.taskLogisticWithHook n checkAccuracy (ANum.rational2BallP p TA.taskLogistic_x0)
+taskLogisticMP_TP :: Integer -> Maybe ANum.MPBall
+taskLogisticMP_TP n =
+    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ withP
+    where
+    withP p =
+        TP.taskLogisticWithHook n checkAccuracy c x0
+        where
+        x0 = ANum.rational2BallP p TP.taskLogistic_x0
+        c = ANum.rational2BallP p TP.taskLogistic_c
+    
+taskLogisticMP_TA :: Integer -> Maybe ANum.MPBall
+taskLogisticMP_TA n =
+    snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ withP
+    where
+    withP p =
+        TA.taskLogisticWithHook n checkAccuracy x0
+        where
+        x0 = ANum.rational2BallP p TP.taskLogistic_x0
+        
     
 checkAccuracy :: ANum.MPBall -> Maybe ANum.MPBall
 checkAccuracy ball 
