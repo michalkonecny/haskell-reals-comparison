@@ -31,11 +31,11 @@ Each benchmark has been executed repeatedly until 3 consecutive times the result
 
 | Implementation | real data type | logistic0 (n=100) | logistic1 (n=1000)  | logistic2 (n=10000)  | logistic3 (n=100000) |
 | -------- | ------ | ---- | ---- | ---- | ---- |
-| ireal | IReal, Floating operations | 0.04 s | 19.8 s / 19 MB | > 2 hours, > 500MB |  |
-| aern2 | CauchyReal, Floating operations | 0.01 s | 0.06 s / 12 MB | 3.4 s / 211 MB | > 2GB |
-| aern2 | CauchyReal, ArrowReal operations | 0.01 s | 0.06 s / 12 MB | 3.9 s / 253 MB | > 2GB |
-| aern2 | iRRAM-style MPBall, Floating operations | 0.01 s | 0.02 s / 4 MB | 4.1 s / 13 MB | 506 s / 49 MB|
-| aern2 | iRRAM-style MPBall, ArrowReal operations | 0.01 s | 0.05 s / 4 MB | 4.5 s / 13 MB | 528 s / 45 MB |
+| ireal | IReal, Prelude operations | 0.04 s | 19.8 s / 19 MB | > 2 hours, > 500MB |  |
+| aern2 | CauchyReal, Prelude operations | 0.01 s | 0.06 s / 12 MB | 3.4 s / 211 MB | > 2GB |
+| aern2 | CauchyReal, mixed-type operations | 0.01 s | 0.06 s / 12 MB | 3.9 s / 253 MB | > 2GB |
+| aern2 | iRRAM-style MPBall, Prelude operations | 0.01 s | 0.02 s / 4 MB | 4.1 s / 13 MB | 506 s / 49 MB|
+| aern2 | iRRAM-style MPBall, mixed-type operations | 0.01 s | 0.05 s / 4 MB | 4.5 s / 13 MB | 528 s / 45 MB |
 
 ### TODO
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)
