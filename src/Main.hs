@@ -3,14 +3,17 @@ module Main where
 
 import Prelude
 import Data.String (fromString)
---import Control.Exception
+
+import Control.Arrow
 
 import Data.Number.IReal (IReal) -- package ireal
 --import Data.CReal (CReal) -- package exact-real
 import qualified AERN2.Num as ANum 
     (CauchyReal, cauchyReal, 
      getAccuracy, bits,
-     MPBall, rational2BallP, iterateUntilAccurate)
+     MPBall, rational2BallP,
+     PrecisionPolicy(..), PrecisionPolicyMode(..), WithPrecisionPolicy(..), 
+     iterateUntilAccurate)
 --import qualified AERN2.Net as ANet ()
 
 import qualified Tasks.PreludeOps as TP
@@ -69,8 +72,9 @@ taskLogisticMP_TA n =
     snd $ last $ ANum.iterateUntilAccurate (ANum.bits (50 :: Integer)) $ withP
     where
     withP p =
-        TA.taskLogisticWithHook n checkAccuracy x0
+        ANum.runWithPrecisionPolicy (TA.taskLogisticWithHook n (arr checkAccuracy)) pp x0
         where
+        pp = ANum.PrecisionPolicy p ANum.PrecisionPolicyMode_UseCurrent
         x0 = ANum.rational2BallP p TP.taskLogistic_x0
         
     

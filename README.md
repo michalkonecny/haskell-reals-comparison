@@ -24,7 +24,7 @@ Each benchmark has been executed repeatedly until 3 consecutive times the result
 | Implementation | Notable dependencies | Status | Reliability | Release date of the version used here |
 | ----- | ----- | ----- | ----- | ----- |
 | [ireal](https://hackage.haskell.org/package/ireal) | _(pure Haskell)_ | fairly complete, on Hackage | well tested | 2015-10-31 |
-| [aern2](https://github.com/michalkonecny/aern2) | [haskell-mpfr](https://github.com/comius/haskell-mpfr) | experimental, on GitHub | not tested yet | 2016-01-21 |
+| [aern2](https://github.com/michalkonecny/aern2) | [haskell-mpfr](https://github.com/comius/haskell-mpfr) | experimental, on GitHub | not tested yet | 2016-01-27 |
 
 
 ### Benchmark results
@@ -32,10 +32,10 @@ Each benchmark has been executed repeatedly until 3 consecutive times the result
 | Implementation | real data type | logistic0 (n=100) | logistic1 (n=1000)  | logistic2 (n=10000)  | logistic3 (n=100000) |
 | -------- | ------ | ---- | ---- | ---- | ---- |
 | ireal | IReal, Prelude operations | 0.04 s | 19.8 s / 19 MB | > 2 hours, > 500MB |  |
-| aern2 | CauchyReal, Prelude operations | 0.01 s | 0.06 s / 12 MB | 3.4 s / 211 MB | > 2GB |
-| aern2 | CauchyReal, mixed-type operations | 0.01 s | 0.06 s / 12 MB | 3.9 s / 253 MB | > 2GB |
-| aern2 | iRRAM-style MPBall, Prelude operations | 0.01 s | 0.02 s / 4 MB | 4.1 s / 13 MB | 506 s / 49 MB|
-| aern2 | iRRAM-style MPBall, mixed-type operations | 0.01 s | 0.05 s / 4 MB | 4.5 s / 13 MB | 528 s / 45 MB |
+| aern2 | CauchyReal, Prelude operations | 0.01 s | 0.08 s / 11 MB | 3.6 s / 211 MB | > 2GB |
+| aern2 | CauchyReal, mixed-type operations | 0.01 s | 0.08 s / 12 MB | 4.2 s / 270 MB | > 2GB |
+| aern2 | iRRAM-style MPBall, Prelude operations | 0.01 s | 0.05 s / 4 MB | 4.4 s / 11 MB | 521 s / 49 MB|
+| aern2 | iRRAM-style MPBall, mixed-type operations | 0.02 s | 0.18 s / 4 MB | 6.5 s / 13 MB | 550 s / 106 MB |
 
 ### TODO
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)
