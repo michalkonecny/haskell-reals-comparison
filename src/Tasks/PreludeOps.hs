@@ -14,8 +14,8 @@ logistic :: Fractional t => t -> Integer -> t -> t
 logistic c n x0 = case logisticWithHook Just c n x0 of Just r -> r; _ -> error ""
 
 taskLogistic_x0 :: Fractional t => t
-taskLogistic_x0 = 0.125     
-    
+taskLogistic_x0 = 0.125
+
 taskLogistic_c :: Fractional t => t
 taskLogistic_c = 3.82 -- not dyadic
 --standardC = 3.8203125 -- dyadic
@@ -33,4 +33,3 @@ taskLogisticWithHook n hook c x0 =
 taskLogistic :: (Fractional t) => Integer -> t
 taskLogistic n =
     logistic taskLogistic_c n taskLogistic_x0
-

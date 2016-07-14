@@ -1,29 +1,23 @@
-{-# LANGUAGE Arrows, FlexibleContexts, TemplateHaskell, TypeOperators #-}
+{-# LANGUAGE FlexibleContexts, TypeOperators, TypeFamilies #-}
 module Tasks.AERN2Ops where
 
-import AERN2.Num
-import Control.Category
-import Control.Arrow
+import Numeric.MixedTypes
+
+import Control.Monad
+
 import Tasks.PreludeOps (taskLogistic_c)
 
-logisticWithHookA :: (ArrowReal to r) => (r `to` Maybe r) -> Rational -> Integer -> r `to` Maybe r
-logisticWithHookA hook c n =
-    (foldl1 (<<<) (replicate (int n) step)) <<< arr Just 
+logisticWithHook :: (Ring r, CanMulBy r Rational) => (r -> Maybe r) -> Rational -> Integer -> r -> Maybe r
+logisticWithHook hook c n =
+    foldl1 (<=<) (replicate (int n) step)
     where
-    step =
-        proc maybeX ->
-            case maybeX of
-                Nothing -> returnA -< Nothing
-                Just x -> 
-                    hook <<< $(exprA[|let [x]=vars in  c * x * (1 - x)|]) -< x
-    
-taskLogisticWithHook :: ArrowReal to r => Integer -> r `to` Maybe r -> r `to` Maybe r
-taskLogisticWithHook n hook = logisticWithHookA hook taskLogistic_c n
+    step x =
+      hook $ c * x * (1 - x)
 
-taskLogistic :: ArrowReal to r => Integer -> r `to` r
-taskLogistic n = 
-    proc x -> 
-        do 
-        (Just r) <- taskLogisticWithHook n (arr Just) -< x
-        returnA -< r 
+taskLogisticWithHook :: (Ring r, CanMulBy r Rational) => Integer -> (r -> Maybe r) -> r -> Maybe r
+taskLogisticWithHook n hook = logisticWithHook hook taskLogistic_c n
 
+taskLogistic :: (Ring r, CanMulBy r Rational) => Integer -> r -> r
+taskLogistic n x = r
+  where
+  (Just r) = taskLogisticWithHook n Just x
