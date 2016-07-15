@@ -10,7 +10,7 @@ Maintainer:     mikkonecny@gmail.com
 Stability:      experimental
 Category:       Data, Math
 Synopsis:       comparison of Haskell exact real number implementations
-Tested-with:    GHC==7.10.3
+Tested-with:    GHC==7.8.4, GHC==7.10.3, GHC==8.0.1
 Description:    Comparison of Haskell exact real number implementations
 
 executable haskell-reals-comparison
@@ -23,7 +23,6 @@ executable haskell-reals-comparison
   hs-source-dirs:  src
   ghc-options:     -O2 -Wall -rtsopts
   extensions:
-                    OverloadedStrings,
                     RebindableSyntax
   other-modules:
                  Tasks.AERN2Ops,
