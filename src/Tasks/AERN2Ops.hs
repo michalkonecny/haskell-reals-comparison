@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleContexts, TypeOperators, TypeFamilies #-}
+{-# LANGUAGE FlexibleContexts, TypeOperators, TypeFamilies, ConstraintKinds #-}
 module Tasks.AERN2Ops where
 
 import Numeric.MixedTypes
