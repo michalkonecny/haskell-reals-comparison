@@ -17,7 +17,7 @@ executable haskell-reals-comparison
   build-depends:
         base >= 4,
         aern2-num == 0.1,
-        exact-real,
+--        exact-real,
         ireal
   hs-source-dirs:  src
   ghc-options:     -O2 -Wall -rtsopts
