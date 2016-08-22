@@ -54,14 +54,14 @@ bench benchArg implArg =
                     -- "aern2_CR_preludeOps" -> show (TP.taskLogistic n :: AERN2Real.CauchyReal)
                     "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n)
                     "aern2_MP_aern2Ops" -> show (taskLogisticMP_TA n)
-                    -- "aern2_CRpureArrow_aern2Ops" -> show (taskLogisticCRpureArrow_TA n)
+                    "aern2_CR_aern2Ops" -> show (taskLogisticCRpureArrow_TA n)
                     "aern2_CRcachedArrow_aern2Ops" -> show (taskLogisticCRcachedArrow_TA n)
                     _ -> error $ "unknown implementation: " ++ implArg
             _ -> error ""
 
--- taskLogisticCRpureArrow_TA :: Integer -> AERN2Real.CauchyReal
--- taskLogisticCRpureArrow_TA n =
---   TA.taskLogistic n $ AERN2Real.real (TP.taskLogistic_x0 :: Rational)
+taskLogisticCRpureArrow_TA :: Integer -> AERN2Real.CauchyReal
+taskLogisticCRpureArrow_TA n =
+  TA.taskLogistic n $ AERN2Real.real (TP.taskLogistic_x0 :: Rational)
 
 taskLogisticCRcachedArrow_TA :: Integer -> MPBall
 taskLogisticCRcachedArrow_TA n =
