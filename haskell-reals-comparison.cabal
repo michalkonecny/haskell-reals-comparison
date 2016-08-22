@@ -18,6 +18,7 @@ executable haskell-reals-comparison
         base >= 4,
         mixed-types-num == 0.1,
         aern2-mp == 0.1,
+        aern2-real == 0.1,
         -- exact-real,
         ireal
   hs-source-dirs:  src

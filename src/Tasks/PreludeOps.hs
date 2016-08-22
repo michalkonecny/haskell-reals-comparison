@@ -1,7 +1,7 @@
 module Tasks.PreludeOps where
 
 import Prelude
-import Data.String (fromString)
+-- import Data.String (fromString)
 
 logisticWithHook :: Fractional t => (t -> Maybe t) -> t -> Integer -> t -> Maybe t
 logisticWithHook hook c n x0 =

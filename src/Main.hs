@@ -1,9 +1,10 @@
-{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DataKinds, Arrows #-}
 module Main where
 
--- import Prelude
 import Numeric.MixedTypes
-import Data.String (fromString)
+-- import Data.String (fromString)
+
+import Control.Arrow
 
 import Data.Number.IReal (IReal) -- package ireal
 --import Data.CReal (CReal) -- package exact-real
@@ -13,6 +14,9 @@ import qualified AERN2.MP.Ball as MPBall
      bits, getAccuracy,
      iterateUntilAccurate)
 import AERN2.MP.Ball (MPBall, mpBallP)
+
+import qualified AERN2.Real as AERN2Real
+import AERN2.QA ((-:-), (//..), executeQACachedA, qaMakeQueryA)
 
 import qualified Tasks.PreludeOps as TP
 import qualified Tasks.AERN2Ops as TA
@@ -47,13 +51,35 @@ bench benchArg implArg =
                 case implArg of
                     "ireal" -> show (TP.taskLogistic n :: IReal)
 --                    "exact-real" -> show (TP.taskLogistic n :: CReal 100)
-                    -- "aern2_CR_preludeOps" -> show (TP.taskLogistic n :: MPBall.CauchyReal)
+                    -- "aern2_CR_preludeOps" -> show (TP.taskLogistic n :: AERN2Real.CauchyReal)
                     "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n)
-                    -- "aern2_CR_aern2Ops" -> show (TA.taskLogistic n (MPBall.cauchyReal (TP.taskLogistic_x0 :: Rational)))
                     "aern2_MP_aern2Ops" -> show (taskLogisticMP_TA n)
+                    -- "aern2_CRpureArrow_aern2Ops" -> show (taskLogisticCRpureArrow_TA n)
+                    "aern2_CRcachedArrow_aern2Ops" -> show (taskLogisticCRcachedArrow_TA n)
                     _ -> error $ "unknown implementation: " ++ implArg
             _ -> error ""
 
+-- taskLogisticCRpureArrow_TA :: Integer -> AERN2Real.CauchyReal
+-- taskLogisticCRpureArrow_TA n =
+--   TA.taskLogistic n $ AERN2Real.real (TP.taskLogistic_x0 :: Rational)
+
+taskLogisticCRcachedArrow_TA :: Integer -> MPBall
+taskLogisticCRcachedArrow_TA n =
+  snd $ executeQACachedA $
+    proc () ->
+      do
+      x0R <- (-:-)-< AERN2Real.real x0 //.. []
+      (Just x) <-TA.taskLogisticWithHookA n hookA -< x0R
+      qaMakeQueryA -< (x, MPBall.bits 100)
+  where
+  x0 = TP.taskLogistic_x0 :: Rational
+  hookA i =
+    proc r ->
+      do
+      rNext <- (-:-)-< (rename r) //.. []
+      returnA -< Just rNext
+    where
+    rename r = r { AERN2Real.qaName = "x_" ++ show i }
 
 taskLogisticMP_TP :: Integer -> Maybe MPBall
 taskLogisticMP_TP n =
@@ -70,7 +96,7 @@ taskLogisticMP_TA n =
     snd $ last $ MPBall.iterateUntilAccurate (MPBall.bits (50 :: Integer)) $ withP
     where
     withP p =
-        (TA.taskLogisticWithHook n checkAccuracy) x0
+        (TA.taskLogisticWithHook n (const checkAccuracy)) x0
         where
         x0 = mpBallP p (TP.taskLogistic_x0 :: Rational)
 
