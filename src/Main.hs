@@ -68,7 +68,7 @@ taskLogisticCRcachedArrow_TA n =
   snd $ executeQACachedA $
     proc () ->
       do
-      x0R <- (-:-)-< AERN2Real.real x0 //.. []
+      x0R <- (-:-)-< AERN2Real.realA x0 //.. []
       (Just x) <-TA.taskLogisticWithHookA n hookA -< x0R
       qaMakeQueryA -< (x, MPBall.bits 100)
   where
