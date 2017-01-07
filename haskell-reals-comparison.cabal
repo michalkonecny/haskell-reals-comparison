@@ -1,24 +1,25 @@
 Name:           haskell-reals-comparison
-Version:        0.1
-Cabal-Version:  >= 1.8
-Build-Type:     Simple
-License:        BSD3
-License-File:   LICENCE
-Author:         Michal Konecny (Aston University)
-Copyright:      (c) 2015 Michal Konecny
-Maintainer:     mikkonecny@gmail.com
-Stability:      experimental
-Category:       Data, Math
+version:        0.1.0.0
+cabal-version:  >= 1.9.2
+build-type:     Simple
+homepage:       https://github.com/michalkonecny/aern2/aern2-mp
+author:         Michal Konecny
+maintainer:     Michal Konecny <mikkonecny@gmail.com>
+copyright:      (c) 2015-2017 Michal Konecny
+license:        BSD3
+license-file:   LICENSE
+stability:      experimental
+tested-with:    GHC==7.8.4, GHC==7.10.3, GHC==8.0.1
+category:       Math
 Synopsis:       comparison of Haskell exact real number implementations
-Tested-with:    GHC==7.8.4, GHC==7.10.3, GHC==8.0.1
 Description:    Comparison of Haskell exact real number implementations
 
 executable haskell-reals-comparison
   build-depends:
     base >= 4
-    , mixed-types-num == 0.1
-    , aern2-mp == 0.1
-    , aern2-real == 0.1
+    , mixed-types-num == 0.1.*
+    , aern2-mp == 0.1.*
+    , aern2-real == 0.1.*
     -- , exact-real
     , ireal
   hs-source-dirs:  src
