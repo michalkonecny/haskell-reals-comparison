@@ -16,7 +16,7 @@ import qualified AERN2.MP.Ball as MPBall
 import AERN2.MP.Ball (MPBall, mpBallP)
 
 import qualified AERN2.Real as AERN2Real
-import AERN2.QA ((-:-), executeQACachedA, qaMakeQueryA)
+import AERN2.QA ((-:-), executeQACachedA)
 
 import qualified Tasks.PreludeOps as TP
 import qualified Tasks.AERN2Ops as TA
@@ -70,7 +70,7 @@ taskLogisticCRcachedArrow_TA n =
       do
       x0R <- (-:-)-< AERN2Real.realA x0
       (Just x) <-TA.taskLogisticWithHookA n hookA -< x0R
-      qaMakeQueryA -< (x, MPBall.bits 100)
+      AERN2Real.realWithAccuracyA -< (x, MPBall.bits 100)
   where
   x0 = TP.taskLogistic_x0 :: Rational
   hookA i =
@@ -79,7 +79,7 @@ taskLogisticCRcachedArrow_TA n =
       rNext <- (-:-)-< (rename r)
       returnA -< Just rNext
     where
-    rename r = r { AERN2Real.qaName = "x_" ++ show i }
+    rename = AERN2Real.realRename (\_ -> "x_" ++ show i)
 
 taskLogisticMP_TP :: Integer -> Maybe MPBall
 taskLogisticMP_TP n =
