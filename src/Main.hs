@@ -70,7 +70,7 @@ taskLogisticCRcachedArrow_TA n =
       do
       x0R <- (-:-)-< AERN2Real.realA x0
       (Just x) <-TA.taskLogisticWithHookA n hookA -< x0R
-      AERN2Real.realWithAccuracyA -< (x, MPBall.bits 100)
+      AERN2Real.realWithAccuracyA -< (x, AERN2Real.bitsS 100)
   where
   x0 = TP.taskLogistic_x0 :: Rational
   hookA i =
