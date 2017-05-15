@@ -16,7 +16,8 @@ import qualified AERN2.MP.Ball as MPBall
 import AERN2.MP.Ball (MPBall, mpBallP)
 
 import qualified AERN2.Real as AERN2Real
-import AERN2.QA ((-:-), executeQACachedA)
+import AERN2.QA.Protocol ((-:-))
+import AERN2.QA.Strategy.Cached (executeQACachedA)
 
 import qualified Tasks.PreludeOps as TP
 import qualified Tasks.AERN2Ops as TA
