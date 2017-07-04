@@ -1,7 +1,7 @@
-{-# LANGUAGE DataKinds, Arrows #-}
+{-# LANGUAGE DataKinds, Arrows, FlexibleContexts, TypeFamilies #-}
 module Main where
 
-import Numeric.MixedTypes
+import MixedTypesNumPrelude
 -- import Data.String (fromString)
 
 import Control.Arrow
@@ -71,7 +71,7 @@ taskLogisticCRcachedArrow_TA n =
       do
       x0R <- (-:-)-< AERN2Real.realA x0
       (Just x) <-TA.taskLogisticWithHookA n hookA -< x0R
-      AERN2Real.realWithAccuracyA -< (x, AERN2Real.bitsS 100)
+      AERN2Real.realWithAccuracyA Nothing -< (x, AERN2Real.bitsS 100)
   where
   x0 = TP.taskLogistic_x0 :: Rational
   hookA i =

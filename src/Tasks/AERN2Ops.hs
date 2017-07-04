@@ -1,7 +1,7 @@
 {-# LANGUAGE Arrows, FlexibleContexts, TypeOperators, TypeFamilies, ConstraintKinds #-}
 module Tasks.AERN2Ops where
 
-import Numeric.MixedTypes
+import MixedTypesNumPrelude
 
 import Control.Arrow
 
