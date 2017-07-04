@@ -12,22 +12,25 @@ The source of the benchmark tasks:
 * [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base-4.8.1.0/docs/Prelude.html#t:Floating) instance
 * [Tasks.AERN2Ops](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/AERN2Ops.hs) assuming an AERN2 [ArrowReal](https://github.com/michalkonecny/aern2/blob/master/aern2-num/src/AERN2/Num/Operations.hs) instance
 
-The benchmark timings are obtained on a Dell Inspiron 15R with 8GB RAM,
+The benchmark timings are obtained on a Dell Inspiron 15R with 16GB RAM,
 Intel(R) Core(TM) i7-3632QM CPU @ 2.20GHz running Ubuntu 14.04.
 
-The benchmarks have been compiled using ghc-7.8.4 with -O2.
+The benchmarks have been compiled using ghc-7.10.3 with -O2.
 
-Each benchmark has been executed repeatedly until 3 consecutive times the results have fluctuated for less than 5%.
+<!-- Each benchmark has been executed repeatedly until 3 consecutive times the results have fluctuated for less than 5%. -->
 
 ### Implementations
 
 | Implementation | Notable dependencies | Status | Reliability | Release date of the version used here |
 | ----- | ----- | ----- | ----- | ----- |
 | [ireal](https://hackage.haskell.org/package/ireal) | _(pure Haskell)_ | fairly complete, on Hackage | well tested | 2015-10-31 |
-| [aern2](https://github.com/michalkonecny/aern2) | [haskell-mpfr](https://github.com/comius/haskell-mpfr) | experimental, on GitHub | not tested yet | 2016-03-07 |
+| [aern2](https://github.com/michalkonecny/aern2) | [hmpfr](https://hackage.haskell.org/package/hmpfr) | experimental, on GitHub | well tested | 2017-05-15 |
 
 
 ### Benchmark results
+
+<!-- TODO: Update these measurements! -->
+<!-- TODO: add iRRAM-style ireal -->
 
 | Implementation | real data type | logistic0 (n=100) | logistic1 (n=1000)  | logistic2 (n=10000)  | logistic3 (n=100000) |
 | -------- | ------ | ---- | ---- | ---- | ---- |
