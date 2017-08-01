@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds, Arrows, FlexibleContexts, TypeFamilies #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 module Main where
 
 import MixedTypesNumPrelude
@@ -15,11 +16,9 @@ import Data.Number.IReal (IReal)
 --import Data.CReal (CReal) -- package exact-real
 
 import qualified AERN2.MP.Ball as MPBall
-    (
-      -- CauchyReal, cauchyReal,
-     bits, getAccuracy, Accuracy(..),
-     iterateUntilAccurate)
 import AERN2.MP.Ball (MPBall, mpBallP)
+import AERN2.MP.Accuracy
+import AERN2.AccuracySG
 
 import qualified AERN2.Real as AERN2Real
 import AERN2.QA.Protocol ((-:-))
@@ -32,53 +31,55 @@ import System.Environment (getArgs)
 main :: IO ()
 main =
     do
-    [benchArg, implArg] <- getArgs
-    let (resultDecription, benchDecription) = bench benchArg implArg
+    [benchS,  benchParamsS, implS, acS] <- getArgs
+    let benchParams = read ("[" ++ benchParamsS ++ "]") :: [Integer]
+    let ac = bits (read acS :: Integer)
+    let (resultDecription, benchDecription) = bench benchS benchParams implS ac
     putStrLn benchDecription
     putStrLn resultDecription
 
-
-bench :: String -> String -> (String, String)
-bench benchArg implArg =
-    (implArg ++ ": " ++ resultDecription, benchDecription)
+bench :: String -> [Integer] -> String -> Accuracy -> (String, String)
+bench benchS benchParams implS ac =
+    (implS ++ ": " ++ resultDecription, benchDecription)
     where
-    (benchName, benchParams, benchDecription) =
-        case benchArg of
-            "logistic0" -> logisticAux 100
-            "logistic1" -> logisticAux 1000
-            "logistic2" -> logisticAux 10000
-            "logistic3" -> logisticAux 100000
+    benchDecription =
+        case (benchS, benchParams) of
+            ("logistic", [n]) -> logisticAux n
             _ ->
-                error $ "unknown benchmark: " ++ benchArg
+                error $ "unknown benchmark: " ++ benchS
         where
-        logisticAux n = ("logistic"  :: String, [n],  TP.taskLogisticDescription n)
+        logisticAux n = TP.taskLogisticDescription n
     resultDecription =
-        case (benchName, benchParams) of
+        case (benchS, benchParams) of
             ("logistic", [n]) ->
-                case implArg of
-                    "ireal_CR" -> show (TP.taskLogistic n :: IReal)
-                    "ireal_MP" -> show (taskLogisticIReal_TP n)
+                case implS of
+                    "ireal_CR" -> IReal.showIReal (int acD) (TP.taskLogistic n)
+                    "ireal_MP" -> show (taskLogisticIReal_TP n ac)
 --                    "exact-real" -> show (TP.taskLogistic n :: CReal 100)
-                    "aern2_CR_preludeOps" -> show (TP.taskLogistic n :: AERN2Real.CauchyReal)
-                    "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n)
-                    "aern2_MP_aern2Ops" -> show (taskLogisticMP_TA n)
-                    "aern2_CR_aern2Ops" -> show (taskLogisticCRpureArrow_TA n)
-                    "aern2_CRcachedArrow_aern2Ops" -> show (taskLogisticCRcachedArrow_TA n)
-                    _ -> error $ "unknown implementation: " ++ implArg
+                    "aern2_CR_preludeOps" ->
+                      show ((TP.taskLogistic n :: AERN2Real.CauchyReal) AERN2Real.? (accuracySG ac))
+                    "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n ac)
+                    "aern2_MP" -> show (taskLogisticMP_TA n ac)
+                    "aern2_CR" ->
+                      show (taskLogisticCRpureArrow_TA n AERN2Real.? (accuracySG ac))
+                    "aern2_CRcachedArrow" ->
+                      show (taskLogisticCRcachedArrow_TA n ac)
+                    _ -> error $ "unknown implementation: " ++ implS
             _ -> error ""
+    acD = round ((fromAccuracy ac) /! 3.32)
 
 taskLogisticCRpureArrow_TA :: Integer -> AERN2Real.CauchyReal
 taskLogisticCRpureArrow_TA n =
   TA.taskLogistic n $ AERN2Real.real (TP.taskLogistic_x0 :: Rational)
 
-taskLogisticCRcachedArrow_TA :: Integer -> MPBall
-taskLogisticCRcachedArrow_TA n =
+taskLogisticCRcachedArrow_TA :: Integer -> Accuracy -> MPBall
+taskLogisticCRcachedArrow_TA n ac =
   snd $ executeQACachedA $
     proc () ->
       do
       x0R <- (-:-)-< AERN2Real.realA x0
       (Just x) <-TA.taskLogisticWithHookA n hookA -< x0R
-      AERN2Real.realWithAccuracyA Nothing -< (x, AERN2Real.bitsSG 100 120)
+      AERN2Real.realWithAccuracyA Nothing -< (x, accuracySG ac)
   where
   x0 = TP.taskLogistic_x0 :: Rational
   hookA i =
@@ -89,9 +90,9 @@ taskLogisticCRcachedArrow_TA n =
     where
     rename = AERN2Real.realRename (\_ -> "x_" ++ show i)
 
-taskLogisticMP_TP :: Integer -> Maybe MPBall
-taskLogisticMP_TP n =
-    snd $ last $ MPBall.iterateUntilAccurate (MPBall.bits (100 :: Integer)) $ withP
+taskLogisticMP_TP :: Integer -> Accuracy -> Maybe MPBall
+taskLogisticMP_TP n ac =
+    snd $ last $ MPBall.iterateUntilAccurate ac withP
     where
     withP p =
         TP.taskLogisticWithHook n checkAccuracyMP c x0
@@ -99,9 +100,9 @@ taskLogisticMP_TP n =
         x0 = mpBallP p (TP.taskLogistic_x0 :: Rational)
         c = mpBallP p (TP.taskLogistic_c :: Rational)
 
-taskLogisticMP_TA :: Integer -> Maybe MPBall
-taskLogisticMP_TA n =
-    snd $ last $ MPBall.iterateUntilAccurate (MPBall.bits (100 :: Integer)) $ withP
+taskLogisticMP_TA :: Integer -> Accuracy -> Maybe MPBall
+taskLogisticMP_TA n ac =
+    snd $ last $ MPBall.iterateUntilAccurate ac withP
     where
     withP p =
         (TA.taskLogisticWithHook n (const checkAccuracyMP)) x0
@@ -114,19 +115,19 @@ checkAccuracyMP ball
     | MPBall.getAccuracy ball < (MPBall.bits 100) = Nothing
     | otherwise = Just ball
 
-taskLogisticIReal_TP :: Integer -> Maybe IReal
-taskLogisticIReal_TP n =
-    snd $ last $ AERN2Real.iterateUntilAccurate (AERN2Real.bits (100 :: Integer)) $ withP
+taskLogisticIReal_TP :: Integer -> Accuracy -> Maybe IReal
+taskLogisticIReal_TP n ac =
+    snd $ last $ AERN2Real.iterateUntilAccurate ac $ withP
     where
     withP p =
-        TP.taskLogisticWithHook n (setPAndCheckAccuracyIReal p) c x0
+        TP.taskLogisticWithHook n (setPAndCheckAccuracyIReal ac p) c x0
         where
         x0 = P.fromRational (TP.taskLogistic_x0 :: Rational)
         c = P.fromRational (TP.taskLogistic_c :: Rational)
 
-setPAndCheckAccuracyIReal :: AERN2Real.Precision -> IReal -> Maybe IReal
-setPAndCheckAccuracyIReal p rB
-  | AERN2Real.getAccuracy rP < 100 = Nothing
+setPAndCheckAccuracyIReal :: Accuracy -> AERN2Real.Precision -> IReal -> Maybe IReal
+setPAndCheckAccuracyIReal ac p rB
+  | AERN2Real.getAccuracy rP < ac = Nothing
   | otherwise = Just rP
   where
   rP = IReal.prec (int $ round $ (integer p) /! 3.32) rB
