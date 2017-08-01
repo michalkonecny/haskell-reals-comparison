@@ -59,7 +59,7 @@ bench benchArg implArg =
                     "ireal_CR" -> show (TP.taskLogistic n :: IReal)
                     "ireal_MP" -> show (taskLogisticIReal_TP n)
 --                    "exact-real" -> show (TP.taskLogistic n :: CReal 100)
-                    -- "aern2_CR_preludeOps" -> show (TP.taskLogistic n :: AERN2Real.CauchyReal)
+                    "aern2_CR_preludeOps" -> show (TP.taskLogistic n :: AERN2Real.CauchyReal)
                     "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n)
                     "aern2_MP_aern2Ops" -> show (taskLogisticMP_TA n)
                     "aern2_CR_aern2Ops" -> show (taskLogisticCRpureArrow_TA n)
