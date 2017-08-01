@@ -23,6 +23,7 @@ taskLogisticWithHook ::
   Integer -> (Integer -> r -> Maybe r) -> r -> Maybe r
 taskLogisticWithHook = taskLogisticWithHookA
 
+
 taskLogisticWithHookA ::
   (ArrowChoice to, HasLogisticOps r)
   =>
@@ -35,7 +36,10 @@ logisticWithHook ::
   (HasLogisticOps r)
   =>
   (Integer -> r -> Maybe r) -> Rational -> Integer -> Maybe r -> Maybe r
-logisticWithHook = logisticWithHookA
+logisticWithHook hook c n0 x0 = loop' n0 x0
+  where loop' _ Nothing = Nothing
+        loop' 0 x = x
+        loop' n (Just x) = seq x (loop' (n-1) (hook n $ c * x * (1-x)))
 
 logisticWithHookA ::
   (ArrowChoice to, HasLogisticOps r)

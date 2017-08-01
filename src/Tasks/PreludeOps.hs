@@ -3,12 +3,21 @@ module Tasks.PreludeOps where
 import Prelude
 -- import Data.String (fromString)
 
-logisticWithHook :: Fractional t => (t -> Maybe t) -> t -> Integer -> t -> Maybe t
-logisticWithHook hook c n x0 =
-    foldl1 (.) (replicate (fromInteger n) step) (Just x0)
-    where
-    step (Just x) = hook $ c * x * (1 - x)
-    step Nothing = Nothing
+-- Alternative definition with much better space behaviour.
+-- (by Björn von Sydow)
+logisticWithHook :: Num t => (t -> Maybe t) -> t -> Integer -> t -> Maybe t
+logisticWithHook hook c n0 x0 = loop n0 (Just x0)
+  where loop _ Nothing = Nothing
+        loop 0 x = x
+        loop n (Just x) = seq x (loop (n-1) (hook $ c * x * (1-x)))
+
+-- logisticWithHook :: Fractional t => (t -> Maybe t) -> t -> Integer -> t -> Maybe t
+-- logisticWithHook hook c n x0 =
+--     foldl1 (.) (replicate (fromInteger n) step) (Just x0)
+--     where
+--     step (Just x) = hook $ c * x * (1 - x)
+--     step Nothing = Nothing
+
 
 logistic :: Fractional t => t -> Integer -> t -> t
 logistic c n x0 = case logisticWithHook Just c n x0 of Just r -> r; _ -> error ""

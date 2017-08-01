@@ -26,6 +26,7 @@ import AERN2.QA.Strategy.Cached (executeQACachedA)
 
 import qualified Tasks.PreludeOps as TP
 import qualified Tasks.MixedTypesNumOps as TA
+import qualified Tasks.IRealOps as TI
 import System.Environment (getArgs)
 
 main :: IO ()
@@ -55,6 +56,8 @@ bench benchS benchParams implS ac =
                 case implS of
                     "ireal_CR" -> IReal.showIReal (int acD) (TP.taskLogistic n)
                     "ireal_MP" -> show (taskLogisticIReal_TP n ac)
+                    "ireal_MP1" -> show (TI.taskLogistic1 n (bits2dec $ fromAccuracy ac))
+                    "ireal_MP2" -> show (TI.taskLogistic2 n (bits2dec $ fromAccuracy ac))
 --                    "exact-real" -> show (TP.taskLogistic n :: CReal 100)
                     "aern2_CR_preludeOps" ->
                       show ((TP.taskLogistic n :: AERN2Real.CauchyReal) AERN2Real.? (accuracySG ac))
@@ -130,7 +133,10 @@ setPAndCheckAccuracyIReal ac p rB
   | AERN2Real.getAccuracy rP < ac = Nothing
   | otherwise = Just rP
   where
-  rP = IReal.prec (int $ round $ (integer p) /! 3.32) rB
+  rP = IReal.prec (bits2dec (integer p)) rB
+
+bits2dec :: Integer -> Int
+bits2dec b = int $ round $ b /! 3.32
 
 instance AERN2Real.HasAccuracy IReal where
   getAccuracy rB

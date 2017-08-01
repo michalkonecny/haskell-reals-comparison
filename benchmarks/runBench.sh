@@ -69,6 +69,14 @@ function runForAllMethods
     method="ireal_MP"; bparamss="$method_ireal_MP_bparamss" method_ireal_MP_bparamss=""
     runForBenchParamss
   fi
+  if [ "$method_ireal_MP1_bparamss" != "" ]; then
+    method="ireal_MP1"; bparamss="$method_ireal_MP1_bparamss" method_ireal_MP1_bparamss=""
+    runForBenchParamss
+  fi
+  if [ "$method_ireal_MP2_bparamss" != "" ]; then
+    method="ireal_MP2"; bparamss="$method_ireal_MP2_bparamss" method_ireal_MP2_bparamss=""
+    runForBenchParamss
+  fi
   # if [ "$method_aern2_CR_Prelude_bparamss" != "" ]; then
   #   method="aern2_CR_preludeOps"; bparamss="$method_aern2_CR_Prelude_bparamss" method_aern2_CR_Prelude_bparamss=""
   #   runForBenchParamss
@@ -91,11 +99,31 @@ function runForAllMethods
 ### logistic
 #################
 
+function logisticAllMethodsFine
+{
+  steps100="100 133 177 237 316 421 562 749"
+  steps1000="1000 1330 1770 2370 3160 4210 5620 7490"
+  steps10000="10000 13300 17700 23700 31600 42100 56200 74900"
+
+  method_ireal_CR_bparamss="$steps100 1000 1330 1770 2370 3160 4210";
+  method_aern2_CR_bparamss="$steps100 $steps1000 10000";
+  method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_ireal_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_ireal_MP2_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_aern2_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
+
+  bench="logistic"; dir="$bench";
+  params="100";
+  runForAllMethods
+}
+
 function logisticAllMethods
 {
   method_ireal_CR_bparamss="100 320 1000 3200";
   method_aern2_CR_bparamss="100 320 1000 3200 10000";
   method_ireal_MP_bparamss="100 320 1000 3200 10000 32000 100000";
+  method_ireal_MP1_bparamss="100 320 1000 3200 10000 32000 100000";
+  method_ireal_MP2_bparamss="100 320 1000 3200 10000 32000 100000";
   method_aern2_MP_bparamss="100 320 1000 3200 10000 32000 100000";
 
   bench="logistic"; dir="$bench";
@@ -103,5 +131,5 @@ function logisticAllMethods
   runForAllMethods
 }
 
-
-logisticAllMethods
+# logisticAllMethods
+logisticAllMethodsFine

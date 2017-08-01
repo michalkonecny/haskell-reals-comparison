@@ -1,20 +1,20 @@
 taskLogistic1: 32000 iterations of logistic map with c = 3.82 and x0 = 0.125
 ireal_MP: Just 0.577569868834774476501300905449
 	Command being timed: "haskell-reals-comparison logistic 32000 ireal_MP 100"
-	User time (seconds): 440.97
-	System time (seconds): 63.84
-	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:24.85
+	User time (seconds): 269.58
+	System time (seconds): 0.64
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:30.22
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 26220
+	Maximum resident set size (kbytes): 18696
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 2454701
-	Voluntary context switches: 2
-	Involuntary context switches: 1787
+	Minor (reclaiming a frame) page faults: 498
+	Voluntary context switches: 1
+	Involuntary context switches: 225
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 8

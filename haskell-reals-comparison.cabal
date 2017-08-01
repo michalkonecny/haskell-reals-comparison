@@ -3,7 +3,7 @@ version:        0.1.0.0
 cabal-version:  >= 1.9.2
 build-type:     Simple
 homepage:       https://github.com/michalkonecny/aern2/aern2-mp
-author:         Michal Konecny
+author:         Michal Konecny, Björn von Sydow
 maintainer:     Michal Konecny <mikkonecny@gmail.com>
 copyright:      (c) 2015-2017 Michal Konecny
 license:        BSD3
@@ -28,5 +28,6 @@ executable haskell-reals-comparison
                     RebindableSyntax
   other-modules:
                  Tasks.MixedTypesNumOps,
-                 Tasks.PreludeOps
+                 Tasks.PreludeOps,
+                 Tasks.IRealOps
   main-is: Main.hs
