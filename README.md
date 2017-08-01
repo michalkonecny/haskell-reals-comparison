@@ -44,10 +44,10 @@ Results of the "logistic" benchmark, running n iterations of the logistic map wi
 
 | Implementation | strategy | n=100 | n=320 | n=1000 | n=3200 | n=10000  | n=32000 | n=100000 |
 | -------- | ------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| ireal | Cauchy seq. | 0.02 s | 0.53 s / 6 MB  | 14.84 s / 21 MB | 689 s / 173 MB | | | |
-| ireal | iRRAM-style | 0.62 s | 1.71 s / 12 MB | 4.22 s  / 13 MB | 17 s  / 18 MB  | 62 s / 19 MB   | 441 s / 25 MB | 2611 s / 41 MB |
-| aern2 | Cauchy seq. | 0.02 s | 0.07 s / 14 MB | 0.26 s  / 30 MB | 1.17 s / 93 MB | 7.6 s / 278 MB | | |
-| aern2 | iRRAM-style | 0.02 s | 0.05 s / 8 MB  | 0.14 s  / 9&nbsp;MB  | 1.0 s  / 16 MB | 6.9 s / 16 MB  | 181 s / 33 MB | 1875 s / 95 MB |
+| ireal | Cauchy seq. | 0.02 s | 0.53 s / 6&nbsp;MB  | 14.84 s / 21&nbsp;MB | 689 s / 173&nbsp;MB | | | |
+| ireal | iRRAM-style | 0.62 s | 1.71 s / 12&nbsp;MB | 4.22 s  / 13&nbsp;MB | 17 s  / 18&nbsp;MB  | 62 s / 19&nbsp;MB   | 441 s / 25&nbsp;MB | 2611 s / 41&nbsp;MB |
+| aern2 | Cauchy seq. | 0.02 s | 0.07 s / 14&nbsp;MB | 0.26 s  / 30&nbsp;MB | 1.17 s / 93&nbsp;MB | 7.6 s / 278&nbsp;MB | | |
+| aern2 | iRRAM-style | 0.02 s | 0.05 s / 8&nbsp;MB  | 0.14 s  / 9&nbsp;MB  | 1.0 s  / 16&nbsp;MB | 6.9 s / 16&nbsp;MB  | 181 s / 33&nbsp;MB | 1875 s / 95&nbsp;MB |
 
 ### TODO
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)
