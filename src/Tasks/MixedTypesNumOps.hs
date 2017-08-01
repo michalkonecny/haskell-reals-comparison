@@ -1,5 +1,5 @@
 {-# LANGUAGE Arrows, FlexibleContexts, TypeOperators, TypeFamilies, ConstraintKinds #-}
-module Tasks.AERN2Ops where
+module Tasks.MixedTypesNumOps where
 
 import MixedTypesNumPrelude
 

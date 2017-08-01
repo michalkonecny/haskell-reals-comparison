@@ -2,16 +2,22 @@
 module Main where
 
 import MixedTypesNumPrelude
+import qualified Prelude as P
 -- import Data.String (fromString)
 
 import Control.Arrow
 
-import Data.Number.IReal (IReal) -- package ireal
+import qualified Data.Number.IReal as IReal -- package ireal
+import qualified Data.Number.IReal.IReal as IReal -- package ireal
+import qualified Data.Number.IReal.IntegerInterval as IReal -- package ireal
+import Data.Number.IReal (IReal)
+
 --import Data.CReal (CReal) -- package exact-real
+
 import qualified AERN2.MP.Ball as MPBall
     (
       -- CauchyReal, cauchyReal,
-     bits, getAccuracy,
+     bits, getAccuracy, Accuracy(..),
      iterateUntilAccurate)
 import AERN2.MP.Ball (MPBall, mpBallP)
 
@@ -20,7 +26,7 @@ import AERN2.QA.Protocol ((-:-))
 import AERN2.QA.Strategy.Cached (executeQACachedA)
 
 import qualified Tasks.PreludeOps as TP
-import qualified Tasks.AERN2Ops as TA
+import qualified Tasks.MixedTypesNumOps as TA
 import System.Environment (getArgs)
 
 main :: IO ()
@@ -50,7 +56,8 @@ bench benchArg implArg =
         case (benchName, benchParams) of
             ("logistic", [n]) ->
                 case implArg of
-                    "ireal" -> show (TP.taskLogistic n :: IReal)
+                    "ireal_CR" -> show (TP.taskLogistic n :: IReal)
+                    "ireal_MP" -> show (taskLogisticIReal_TP n)
 --                    "exact-real" -> show (TP.taskLogistic n :: CReal 100)
                     -- "aern2_CR_preludeOps" -> show (TP.taskLogistic n :: AERN2Real.CauchyReal)
                     "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n)
@@ -71,7 +78,7 @@ taskLogisticCRcachedArrow_TA n =
       do
       x0R <- (-:-)-< AERN2Real.realA x0
       (Just x) <-TA.taskLogisticWithHookA n hookA -< x0R
-      AERN2Real.realWithAccuracyA Nothing -< (x, AERN2Real.bitsS 100)
+      AERN2Real.realWithAccuracyA Nothing -< (x, AERN2Real.bitsSG 100 120)
   where
   x0 = TP.taskLogistic_x0 :: Rational
   hookA i =
@@ -84,25 +91,51 @@ taskLogisticCRcachedArrow_TA n =
 
 taskLogisticMP_TP :: Integer -> Maybe MPBall
 taskLogisticMP_TP n =
-    snd $ last $ MPBall.iterateUntilAccurate (MPBall.bits (50 :: Integer)) $ withP
+    snd $ last $ MPBall.iterateUntilAccurate (MPBall.bits (100 :: Integer)) $ withP
     where
     withP p =
-        TP.taskLogisticWithHook n checkAccuracy c x0
+        TP.taskLogisticWithHook n checkAccuracyMP c x0
         where
         x0 = mpBallP p (TP.taskLogistic_x0 :: Rational)
         c = mpBallP p (TP.taskLogistic_c :: Rational)
 
 taskLogisticMP_TA :: Integer -> Maybe MPBall
 taskLogisticMP_TA n =
-    snd $ last $ MPBall.iterateUntilAccurate (MPBall.bits (50 :: Integer)) $ withP
+    snd $ last $ MPBall.iterateUntilAccurate (MPBall.bits (100 :: Integer)) $ withP
     where
     withP p =
-        (TA.taskLogisticWithHook n (const checkAccuracy)) x0
+        (TA.taskLogisticWithHook n (const checkAccuracyMP)) x0
         where
         x0 = mpBallP p (TP.taskLogistic_x0 :: Rational)
 
 
-checkAccuracy :: MPBall -> Maybe MPBall
-checkAccuracy ball
-    | MPBall.getAccuracy ball < (MPBall.bits 50) = Nothing
+checkAccuracyMP :: MPBall -> Maybe MPBall
+checkAccuracyMP ball
+    | MPBall.getAccuracy ball < (MPBall.bits 100) = Nothing
     | otherwise = Just ball
+
+taskLogisticIReal_TP :: Integer -> Maybe IReal
+taskLogisticIReal_TP n =
+    snd $ last $ AERN2Real.iterateUntilAccurate (AERN2Real.bits (100 :: Integer)) $ withP
+    where
+    withP p =
+        TP.taskLogisticWithHook n (setPAndCheckAccuracyIReal p) c x0
+        where
+        x0 = P.fromRational (TP.taskLogistic_x0 :: Rational)
+        c = P.fromRational (TP.taskLogistic_c :: Rational)
+
+setPAndCheckAccuracyIReal :: AERN2Real.Precision -> IReal -> Maybe IReal
+setPAndCheckAccuracyIReal p rB
+  | AERN2Real.getAccuracy rP < 100 = Nothing
+  | otherwise = Just rP
+  where
+  rP = IReal.prec (int $ round $ (integer p) /! 3.32) rB
+
+instance AERN2Real.HasAccuracy IReal where
+  getAccuracy rB
+    | rdIsZero = AERN2Real.Exact
+    | otherwise =
+        AERN2Real.bits $ IReal.lg2 $ P.ceiling $ (P.recip rd P.+ (P.fromRational 0.5))
+    where
+    rd = IReal.rad rB
+    rdIsZero = 1 == (IReal.midI $ IReal.appr rd (int 10000000)) -- not entirely safe...

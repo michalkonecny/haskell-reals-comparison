@@ -17,7 +17,7 @@ Description:    Comparison of Haskell exact real number implementations
 executable haskell-reals-comparison
   build-depends:
     base >= 4
-    , mixed-types-num == 0.2.*
+    , mixed-types-num == 0.3.*
     , aern2-mp == 0.1.*
     , aern2-real == 0.1.*
     -- , exact-real
@@ -27,6 +27,6 @@ executable haskell-reals-comparison
   extensions:
                     RebindableSyntax
   other-modules:
-                 Tasks.AERN2Ops,
+                 Tasks.MixedTypesNumOps,
                  Tasks.PreludeOps
   main-is: Main.hs

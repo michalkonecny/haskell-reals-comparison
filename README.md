@@ -12,8 +12,11 @@ The source of the benchmark tasks:
 * [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base-4.8.1.0/docs/Prelude.html#t:Floating) instance
 * [Tasks.AERN2Ops](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/AERN2Ops.hs) assuming an AERN2 [ArrowReal](https://github.com/michalkonecny/aern2/blob/master/aern2-num/src/AERN2/Num/Operations.hs) instance
 
-The benchmark timings are obtained on a Dell Inspiron 15R with 16GB RAM,
-Intel(R) Core(TM) i7-3632QM CPU @ 2.20GHz running Ubuntu 14.04.
+The benchmark timings are obtained on a
+<!-- Dell Inspiron 15R with 16GB RAM,
+Intel(R) Core(TM) i7-3632QM CPU @ 2.20GHz running Ubuntu 14.04. -->
+Lenovo T440p with 16GB RAM,
+Intel(R) Core(TM) i7-4710MQ CPU @ 2.50GHz running Ubuntu 14.04.
 
 The benchmarks have been compiled using ghc-7.10.3 with -O2.
 
