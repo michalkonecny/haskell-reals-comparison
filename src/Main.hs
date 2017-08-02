@@ -63,6 +63,8 @@ bench benchS benchParams implS ac =
                       show ((TP.taskLogistic n :: AERN2Real.CauchyReal) AERN2Real.? (accuracySG ac))
                     "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n ac)
                     "aern2_MP" -> show (taskLogisticMP_TA n ac)
+                    "aern2_MP1" -> show (taskLogisticMP1_TA n ac)
+                    "aern2_MP2" -> show (taskLogisticMP2_TA n ac)
                     "aern2_CR" ->
                       show (taskLogisticCRpureArrow_TA n AERN2Real.? (accuracySG ac))
                     "aern2_CRcachedArrow" ->
@@ -111,6 +113,26 @@ taskLogisticMP_TA n ac =
         (TA.taskLogisticWithHook n (const checkAccuracyMP)) x0
         where
         x0 = mpBallP p (TP.taskLogistic_x0 :: Rational)
+
+-- adaptation of Bjorn's code:
+taskLogisticMP1_TA :: Integer -> Accuracy -> MPBall
+taskLogisticMP1_TA n ac =
+  loop (max 2 $ round $ 3.32 * fromAccuracy ac)
+  where loop p =
+          maybe (loop (2*p)) id (TA.taskLogisticWithHook n hook x0P)
+          where
+          x0P = mpBallP (AERN2Real.prec p) (TP.taskLogistic_x0 :: Rational)
+        hook _ x
+          | getAccuracy x >= ac = Just x
+          | otherwise = Nothing
+
+-- adaptation of Bjorn's code:
+taskLogisticMP2_TA :: Integer -> Accuracy -> MPBall
+taskLogisticMP2_TA n ac =
+  TA.taskLogistic n x0P
+      where
+      x0P = mpBallP (AERN2Real.prec p) (TP.taskLogistic_x0 :: Rational)
+      p = integer $ TI.logisticPrecReq2 n (int $ fromAccuracy ac)
 
 
 checkAccuracyMP :: MPBall -> Maybe MPBall

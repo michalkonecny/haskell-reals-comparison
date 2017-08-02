@@ -21,17 +21,10 @@ taskLogisticWithHook ::
   (HasLogisticOps r)
   =>
   Integer -> (Integer -> r -> Maybe r) -> r -> Maybe r
-taskLogisticWithHook = taskLogisticWithHookA
+taskLogisticWithHook n hook x =
+  logisticWithHook hook taskLogistic_c n (Just x)
 
-
-taskLogisticWithHookA ::
-  (ArrowChoice to, HasLogisticOps r)
-  =>
-  Integer -> (Integer -> r `to` Maybe r) -> (r `to` Maybe r)
-taskLogisticWithHookA n hookA =
-  proc r ->
-    logisticWithHookA hookA taskLogistic_c n -< (Just r)
-
+-- adaptation of Bjorn's code:
 logisticWithHook ::
   (HasLogisticOps r)
   =>
@@ -40,6 +33,16 @@ logisticWithHook hook c n0 x0 = loop' n0 x0
   where loop' _ Nothing = Nothing
         loop' 0 x = x
         loop' n (Just x) = seq x (loop' (n-1) (hook n $ c * x * (1-x)))
+
+{- Arrow-generic versions -}
+
+taskLogisticWithHookA ::
+  (ArrowChoice to, HasLogisticOps r)
+  =>
+  Integer -> (Integer -> r `to` Maybe r) -> (r `to` Maybe r)
+taskLogisticWithHookA n hookA =
+  proc r ->
+    logisticWithHookA hookA taskLogistic_c n -< (Just r)
 
 logisticWithHookA ::
   (ArrowChoice to, HasLogisticOps r)

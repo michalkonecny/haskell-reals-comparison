@@ -26,7 +26,8 @@ import Data.Maybe
 -- Start with showPrecision decimals, give up and double nr of decimals
 -- as soon as intermediate value has too low precision.
 taskLogistic1 :: Integer -> Int -> IReal
-taskLogistic1 n showPrecision = loop showPrecision
+taskLogistic1 n showPrecision =
+  loop showPrecision
   where loop d = maybe (loop (2*d)) id (logisticWithHook (hook d) taskLogistic_c n taskLogistic_x0)
         hook d x
           | rad r <! 0.1^showPrecision `atDecimals` (showPrecision+1) = Just r
@@ -36,12 +37,15 @@ taskLogistic1 n showPrecision = loop showPrecision
 -- Alt 2: No iteration; exactly the required precision is used.
 taskLogistic2 :: Integer -> Int -> IReal
 taskLogistic2 n showPrecision =
-    fromJust (logisticWithHook (Just . prec (precReq n showPrecision))
+    fromJust (logisticWithHook (Just . prec (logisticPrecReq10 n showPrecision))
                                              taskLogistic_c
                                              n
                                              taskLogistic_x0)
 
 
 -- Precision required in intermediate values for given n and d (nr of decimals displayed in final result).
-precReq :: Integer -> Int -> Int
-precReq n d = ceiling (fromInteger n * logBase 10 taskLogistic_c) + d
+logisticPrecReq10 :: Integer -> Int -> Int
+logisticPrecReq10 n d = ceiling (fromInteger n * logBase 10 taskLogistic_c) + d
+
+logisticPrecReq2 :: Integer -> Int -> Int
+logisticPrecReq2 n d = ceiling (fromInteger n * logBase 2 taskLogistic_c) + d

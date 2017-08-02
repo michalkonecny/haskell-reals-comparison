@@ -93,6 +93,14 @@ function runForAllMethods
     method="aern2_MP"; bparamss="$method_aern2_MP_bparamss" method_aern2_MP_bparamss=""
     runForBenchParamss
   fi
+  if [ "$method_aern2_MP1_bparamss" != "" ]; then
+    method="aern2_MP1"; bparamss="$method_aern2_MP1_bparamss" method_aern2_MP1_bparamss=""
+    runForBenchParamss
+  fi
+  if [ "$method_aern2_MP2_bparamss" != "" ]; then
+    method="aern2_MP2"; bparamss="$method_aern2_MP2_bparamss" method_aern2_MP2_bparamss=""
+    runForBenchParamss
+  fi
 }
 
 #################
@@ -111,6 +119,8 @@ function logisticAllMethodsFine
   method_ireal_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
   method_ireal_MP2_bparamss="$steps100 $steps1000 $steps10000 100000";
   method_aern2_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_aern2_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_aern2_MP2_bparamss="$steps100 $steps1000 $steps10000 100000";
 
   bench="logistic"; dir="$bench";
   params="100";
