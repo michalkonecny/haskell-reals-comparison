@@ -65,10 +65,10 @@ function runForAllMethods
     method="ireal_CR"; bparamss="$method_ireal_CR_bparamss" method_ireal_CR_bparamss=""
     runForBenchParamss
   fi
-  if [ "$method_ireal_MP_bparamss" != "" ]; then
-    method="ireal_MP"; bparamss="$method_ireal_MP_bparamss" method_ireal_MP_bparamss=""
-    runForBenchParamss
-  fi
+#   if [ "$method_ireal_MP_bparamss" != "" ]; then
+#     method="ireal_MP"; bparamss="$method_ireal_MP_bparamss" method_ireal_MP_bparamss=""
+#     runForBenchParamss
+#   fi
   if [ "$method_ireal_MP1_bparamss" != "" ]; then
     method="ireal_MP1"; bparamss="$method_ireal_MP1_bparamss" method_ireal_MP1_bparamss=""
     runForBenchParamss
@@ -89,10 +89,10 @@ function runForAllMethods
     method="aern2_CR"; bparamss="$method_aern2_CR_bparamss" method_aern2_CR_bparamss=""
     runForBenchParamss
   fi
-  if [ "$method_aern2_MP_bparamss" != "" ]; then
-    method="aern2_MP"; bparamss="$method_aern2_MP_bparamss" method_aern2_MP_bparamss=""
-    runForBenchParamss
-  fi
+#   if [ "$method_aern2_MP_bparamss" != "" ]; then
+#     method="aern2_MP"; bparamss="$method_aern2_MP_bparamss" method_aern2_MP_bparamss=""
+#     runForBenchParamss
+#   fi
   if [ "$method_aern2_MP1_bparamss" != "" ]; then
     method="aern2_MP1"; bparamss="$method_aern2_MP1_bparamss" method_aern2_MP1_bparamss=""
     runForBenchParamss
