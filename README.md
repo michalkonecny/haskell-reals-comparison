@@ -52,7 +52,7 @@ The charts show a few more data points:
 
 | Execution time | Max RAM use |
 | :---: | :---: |
-| <img src="benchresults/charts/logistic-time.png?raw=true" width="300"> | <img src="benchresults/charts/logistic-space.png?raw=true" width="300"> |
+| <img src="benchmarks/charts/logistic-time.png?raw=true" width="300"> | <img src="benchmarks/charts/logistic-space.png?raw=true" width="300"> |
 
 ### TODO
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)
