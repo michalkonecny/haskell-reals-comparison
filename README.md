@@ -37,17 +37,22 @@ For each benchmark and for each implementation, we used two different evaluation
 
 ### Benchmark results
 
-<!-- TODO: Update these measurements! -->
-<!-- TODO: add iRRAM-style ireal -->
-
 Results of the "logistic" benchmark, running n iterations of the logistic map with c=3.82 and x0=0.125.
 
-| Implementation | strategy | n=100 | n=320 | n=1000 | n=3200 | n=10000  | n=32000 | n=100000 |
+| Implementation | strategy | n=100 | n=316 | n=1000 | n=3160 | n=10000  | n=31600 | n=100000 |
 | -------- | ------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| ireal | Cauchy seq. | 0.02 s | 0.53 s / 6&nbsp;MB  | 14.84 s / 21&nbsp;MB | 689 s / 173&nbsp;MB | | | |
-| ireal | iRRAM-style | 0.62 s | 1.71 s / 12&nbsp;MB | 4.22 s  / 13&nbsp;MB | 17 s  / 18&nbsp;MB  | 62 s / 19&nbsp;MB   | 441 s / 25&nbsp;MB | 2611 s / 41&nbsp;MB |
-| aern2 | Cauchy seq. | 0.02 s | 0.07 s / 14&nbsp;MB | 0.26 s  / 30&nbsp;MB | 1.17 s / 93&nbsp;MB | 7.6 s / 278&nbsp;MB | | |
-| aern2 | iRRAM-style | 0.02 s | 0.05 s / 8&nbsp;MB  | 0.14 s  / 9&nbsp;MB  | 1.0 s  / 16&nbsp;MB | 6.9 s / 16&nbsp;MB  | 181 s / 33&nbsp;MB | 1875 s / 95&nbsp;MB |
+| ireal | Cauchy seq. | 0.02 s | 0.51 s / 8&nbsp;MB  | 14.8 s / 22&nbsp;MB  | 628 s / 169&nbsp;MB | | | |
+| ireal | iRRAM-style | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.02 s  / 6&nbsp;MB  | 0.1 s  / 6&nbsp;MB  | 2.3 s / 6&nbsp;MB   | 51 s / 7&nbsp;MB   | 387 s / 9&nbsp;MB   |
+| ireal | guess prec. | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.01 s  / 6&nbsp;MB  | 0.07 s / 6&nbsp;MB  | 1.2 s / 6&nbsp;MB   | 18 s / 6&nbsp;MB   | 280 s / 9&nbsp;MB   |
+| aern2 | Cauchy seq. | 0.02 s | 0.07 s / 14&nbsp;MB | 0.28 s  / 30&nbsp;MB | 1.1 s / 91&nbsp;MB  | 7.6 s / 275&nbsp;MB | | |
+| aern2 | iRRAM-style | 0.01 s | 0.03 s / 7&nbsp;MB  | 0.09 s  / 7&nbsp;MB  | 0.8 s  / 7&nbsp;MB  | 4.6 s /  7&nbsp;MB  | 104 s /  8&nbsp;MB | 2455 s / 11&nbsp;MB |
+| aern2 | guess prec. | 0.01 s | 0.01 s / 7&nbsp;MB  | 0.02 s  / 8&nbsp;MB  | 0.2 s  / 8&nbsp;MB  | 2.8 s /  8&nbsp;MB  |  43 s /  8&nbsp;MB |  726 s / 11&nbsp;MB |
+
+The charts show a few more data points:
+
+| Execution time | Max RAM use |
+| :---: | :---: |
+| <img src="benchresults/charts/logistic-time.png?raw=true" width="300"> | <img src="benchresults/charts/logistic-space.png?raw=true" width="300"> |
 
 ### TODO
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)
