@@ -42,11 +42,11 @@ Results of the "logistic" benchmark, running n iterations of the logistic map wi
 | Implementation | strategy | n=100 | n=316 | n=1000 | n=3160 | n=10000  | n=31600 | n=100000 |
 | -------- | ------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | ireal | Cauchy seq. | 0.02 s | 0.51 s / 8&nbsp;MB  | 14.8 s / 22&nbsp;MB  | 628 s / 169&nbsp;MB | | | |
+| aern2 | Cauchy seq. | 0.01 s | 0.03 s / 10&nbsp;MB | 0.1 s  / 15&nbsp;MB  | 0.42 s / 33&nbsp;MB | 3.1 s / 174&nbsp;MB |  18 s / 683&nbsp;MB | 178 s / 5.3&nbsp;GB | 
 | ireal | iRRAM-style | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.02 s  / 6&nbsp;MB  | 0.1 s  / 6&nbsp;MB  | 2.3 s / 6&nbsp;MB   | 51 s / 7&nbsp;MB   | 387 s / 9&nbsp;MB   |
+| aern2 | iRRAM-style | 0.01 s | 0.02 s / 7&nbsp;MB  | 0.05 s  / 7&nbsp;MB  | 0.44 s  / 7&nbsp;MB  | 2.3 s /  7&nbsp;MB  | 43 s /  11&nbsp;MB | 903 s / 15&nbsp;MB |
 | ireal | guess prec. | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.01 s  / 6&nbsp;MB  | 0.07 s / 6&nbsp;MB  | 1.2 s / 6&nbsp;MB   | 18 s / 6&nbsp;MB   | 280 s / 9&nbsp;MB   |
-| aern2 | Cauchy seq. | 0.02 s | 0.07 s / 14&nbsp;MB | 0.28 s  / 30&nbsp;MB | 1.1 s / 91&nbsp;MB  | 7.6 s / 275&nbsp;MB | | |
-| aern2 | iRRAM-style | 0.01 s | 0.03 s / 7&nbsp;MB  | 0.09 s  / 7&nbsp;MB  | 0.8 s  / 7&nbsp;MB  | 4.6 s /  7&nbsp;MB  | 104 s /  8&nbsp;MB | 2455 s / 11&nbsp;MB |
-| aern2 | guess prec. | 0.01 s | 0.01 s / 7&nbsp;MB  | 0.02 s  / 8&nbsp;MB  | 0.2 s  / 8&nbsp;MB  | 2.8 s /  8&nbsp;MB  |  43 s /  8&nbsp;MB |  726 s / 11&nbsp;MB |
+| aern2 | guess prec. | 0.01 s | 0.01 s / 7&nbsp;MB  | 0.02 s  / 8&nbsp;MB  | 0.14 s  / 8&nbsp;MB  | 1.5 s /  8&nbsp;MB  |  20 s /  10&nbsp;MB |  300 s / 11&nbsp;MB |
 
 The charts show a few more data points:
 

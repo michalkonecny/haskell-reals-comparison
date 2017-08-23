@@ -114,7 +114,7 @@ function logisticAllMethodsFine
   steps10000="10000 13300 17700 23700 31600 42100 56200 74900"
 
   method_ireal_CR_bparamss="$steps100 1000 1330 1770 2370 3160 4210";
-  method_aern2_CR_bparamss="$steps100 $steps1000 10000";
+  method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000 100000";
   # method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
   method_ireal_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
   method_ireal_MP2_bparamss="$steps100 $steps1000 $steps10000 100000";
@@ -130,7 +130,7 @@ function logisticAllMethodsFine
 function logisticAllMethods
 {
   method_ireal_CR_bparamss="100 316 1000 3160";
-  method_aern2_CR_bparamss="100 316 1000 3160 10000";
+  method_aern2_CR_bparamss="100 316 1000 3160 10000 31600 100000";
   # method_ireal_MP_bparamss="100 316 1000 3160 10000 31600 100000";
   method_ireal_MP1_bparamss="100 316 1000 3160 10000 31600 100000";
   method_ireal_MP2_bparamss="100 316 1000 3160 10000 31600 100000";

@@ -1,5 +1,5 @@
 taskLogistic1: 100 iterations of logistic map with c = 3.82 and x0 = 0.125
-aern2_MP2: [4.309357854522346e-1 ± <2^(-101)]
+aern2_MP2: [0.430935785452234587738351290214 ± <2^(-101)]
 	Command being timed: "haskell-reals-comparison logistic 100 aern2_MP2 100"
 	User time (seconds): 0.00
 	System time (seconds): 0.00
@@ -9,10 +9,10 @@ aern2_MP2: [4.309357854522346e-1 ± <2^(-101)]
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 7664
+	Maximum resident set size (kbytes): 7524
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 441
+	Minor (reclaiming a frame) page faults: 436
 	Voluntary context switches: 1
 	Involuntary context switches: 1
 	Swaps: 0
