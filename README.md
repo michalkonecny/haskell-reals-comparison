@@ -23,8 +23,8 @@ The benchmarks have been compiled using ghc-7.10.3 with -O2.
 | Implementation | Notable dependencies | Status | Reliability | Release date of the version used here |
 | ----- | ----- | ----- | ----- | ----- |
 | [ireal](https://hackage.haskell.org/package/ireal) | __pure Haskell__ | fairly complete, on Hackage | well tested | 2015-10-31 |
-<!-- | [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [hmpfr](https://hackage.haskell.org/package/hmpfr) | fairly complete, on GitHub | well tested | 2017-08-01 | -->
 | [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [rounded (MPFR)](https://github.com/michalkonecny/rounded/tree/michal) | fairly complete, on GitHub | well tested | 2017-08-22 |
+<!-- | [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [hmpfr](https://hackage.haskell.org/package/hmpfr) | fairly complete, on GitHub | well tested | 2017-08-01 | -->
 
 The source of the benchmark tasks:  
 * [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base/docs/Prelude.html#t:Floating) instance
