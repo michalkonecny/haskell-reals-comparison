@@ -23,7 +23,8 @@ The benchmarks have been compiled using ghc-7.10.3 with -O2.
 | Implementation | Notable dependencies | Status | Reliability | Release date of the version used here |
 | ----- | ----- | ----- | ----- | ----- |
 | [ireal](https://hackage.haskell.org/package/ireal) | __pure Haskell__ | fairly complete, on Hackage | well tested | 2015-10-31 |
-| [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [hmpfr](https://hackage.haskell.org/package/hmpfr) | fairly complete, on GitHub | well tested | 2017-08-01 |
+<!-- | [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [hmpfr](https://hackage.haskell.org/package/hmpfr) | fairly complete, on GitHub | well tested | 2017-08-01 | -->
+| [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [rounded (MPFR)](https://github.com/michalkonecny/rounded/tree/michal) | fairly complete, on GitHub | well tested | 2017-08-22 |
 
 The source of the benchmark tasks:  
 * [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base/docs/Prelude.html#t:Floating) instance
@@ -42,7 +43,7 @@ Results of the "logistic" benchmark, running n iterations of the logistic map wi
 | Implementation | strategy | n=100 | n=316 | n=1000 | n=3160 | n=10000  | n=31600 | n=100000 |
 | -------- | ------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | ireal | Cauchy seq. | 0.02 s | 0.51 s / 8&nbsp;MB  | 14.8 s / 22&nbsp;MB  | 628 s / 169&nbsp;MB | | | |
-| aern2 | Cauchy seq. | 0.01 s | 0.03 s / 10&nbsp;MB | 0.1 s  / 15&nbsp;MB  | 0.42 s / 33&nbsp;MB | 3.1 s / 174&nbsp;MB |  18 s / 683&nbsp;MB | 178 s / 5.3&nbsp;GB | 
+| aern2 | Cauchy seq. | 0.01 s | 0.03 s / 10&nbsp;MB | 0.1 s  / 15&nbsp;MB  | 0.42 s / 33&nbsp;MB | 3.1 s / 174&nbsp;MB |  18 s / 683&nbsp;MB | 178 s / 5.3&nbsp;GB |
 | ireal | iRRAM-style | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.02 s  / 6&nbsp;MB  | 0.1 s  / 6&nbsp;MB  | 2.3 s / 6&nbsp;MB   | 51 s / 7&nbsp;MB   | 387 s / 9&nbsp;MB   |
 | aern2 | iRRAM-style | 0.01 s | 0.02 s / 7&nbsp;MB  | 0.05 s  / 7&nbsp;MB  | 0.44 s  / 7&nbsp;MB  | 2.3 s /  7&nbsp;MB  | 43 s /  11&nbsp;MB | 903 s / 15&nbsp;MB |
 | ireal | guess prec. | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.01 s  / 6&nbsp;MB  | 0.07 s / 6&nbsp;MB  | 1.2 s / 6&nbsp;MB   | 18 s / 6&nbsp;MB   | 280 s / 9&nbsp;MB   |
@@ -52,7 +53,7 @@ The charts show a few more data points:
 
 | Execution time | Max RAM use |
 | :---: | :---: |
-| <img src="benchmarks/charts/logistic-time.png?raw=true" width="300"> | <img src="benchmarks/charts/logistic-space.png?raw=true" width="300"> |
+| <img src="benchmarks/charts/logistic-time.png?raw=true" width="400"> | <img src="benchmarks/charts/logistic-space.png?raw=true" width="400"> |
 
 ### TODO
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)
