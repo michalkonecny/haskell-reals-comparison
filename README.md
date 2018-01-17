@@ -24,7 +24,7 @@ The benchmarks have been compiled using ghc-7.10.3 with -O2.
 | ----- | ----- | ----- | ----- | ----- |
 | [ireal](https://hackage.haskell.org/package/ireal) | __pure Haskell__ | fairly complete, on Hackage | well tested | 2015-10-31 |
 | [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [rounded (MPFR)](https://github.com/michalkonecny/rounded/tree/michal) | fairly complete, on Hackage | well tested | 2017-08-22 |
-| [CDAR](https://github.com/jensblanck/cdar) | __pure Haskell__ | on GitHub | well documented | 2017-12-08 |
+| [CDAR](https://github.com/jensblanck/cdar) | __pure Haskell__ | on GitHub | well documented, based on [theory](http://cs.swan.ac.uk/%7Ecsjens/pdf/centred.pdf) | 2017-12-08 |
 
 The source of the benchmark tasks:  
 * [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base/docs/Prelude.html#t:Floating) instance
