@@ -1,15 +1,15 @@
-* Regenerate results.csv (and run any benchmarks for which there are no logs):
+* Regenerate logistic-fine.csv (and run any benchmarks for which there are no logs):
 
-rm results.csv
-bash runBench.sh results.csv
+rm logistic-fine.csv
+bash runBench.sh logistic-fine.csv
 
 * Generate svg execution time chart:
 
-aern2-bench-chart CSVName Method BenchN Log ExecTime Log logistic.csv charts
+aern2-bench-chart CSVName Method BenchN Log ExecTime Log logistic-fine.csv charts
 
 * Generate svg max memory usage chart:
 
-aern2-bench-chart CSVName Method BenchN Log MaxMem Log logistic.csv charts
+aern2-bench-chart CSVName Method BenchN Log MaxMem Log logistic-fine.csv charts
 
 * Convert all svgs to pngs suitable for web:
 

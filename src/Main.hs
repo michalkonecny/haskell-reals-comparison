@@ -6,12 +6,13 @@ import MixedTypesNumPrelude
 import qualified Prelude as P
 -- import Data.String (fromString)
 
-import Control.Arrow
+import Control.Arrow hiding (loop)
 
 import qualified Data.Number.IReal as IReal -- package ireal
 import qualified Data.Number.IReal.IReal as IReal -- package ireal
 import qualified Data.Number.IReal.IntegerInterval as IReal -- package ireal
 import Data.Number.IReal (IReal)
+import qualified Data.CDAR as CDAR
 
 --import Data.CReal (CReal) -- package exact-real
 
@@ -54,6 +55,7 @@ bench benchS benchParams implS ac =
         case (benchS, benchParams) of
             ("logistic", [n]) ->
                 case implS of
+                    "cdar" -> CDAR.showA . CDAR.limitSize (int acD) . CDAR.require (int acD) $ (TP.taskLogistic n)
                     "ireal_CR" -> IReal.showIReal (int acD) (TP.taskLogistic n)
                     "ireal_MP" -> show (taskLogisticIReal_TP n ac)
                     "ireal_MP1" -> show (TI.taskLogistic1 n (bits2dec $ fromAccuracy ac))

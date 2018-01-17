@@ -24,16 +24,21 @@ The benchmarks have been compiled using ghc-7.10.3 with -O2.
 | ----- | ----- | ----- | ----- | ----- |
 | [ireal](https://hackage.haskell.org/package/ireal) | __pure Haskell__ | fairly complete, on Hackage | well tested | 2015-10-31 |
 | [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [rounded (MPFR)](https://github.com/michalkonecny/rounded/tree/michal) | fairly complete, on Hackage | well tested | 2017-08-22 |
+| [CDAR](https://github.com/jensblanck/cdar) | __pure Haskell__ | on GitHub | well documented | 2017-12-08 |
 
 The source of the benchmark tasks:  
 * [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base/docs/Prelude.html#t:Floating) instance
 * [Tasks.MixedTypesNumOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/MixedTypesNumOps.hs) assuming instances of relevant classes in [MixedTypesNumPrelude](https://hackage.haskell.org/package/mixed-types-num/docs/MixedTypesNumPrelude.html)
 
-For each benchmark and for each implementation, we used two different evaluation strategies:
+For some implementations, we used more than one evaluation strategy.  In particular, for AERN2 and ireal, we use the following strategies:
 
-* __Cauchy-real style__: Composing operations over real numbers using a lazy composition of Cauchy sequences, ie querying the number with certain accuracy 2^(-n) given by a natural number n.
+* __Fast Cauchy style__: Composing operations over real numbers using a lazy composition of fast Cauchy sequences, ie querying the number with certain accuracy 2^(-n) given by a natural number n.
 
-* __iRRAM style__: Computing using interval arithmetic at a fixed precision for the centers of the intervals.  When the radius grows too large, stop and restart the computation with a higher precision.  Repeat
+* __iRRAM style__: Computing using interval arithmetic at a fixed precision for the centers of the intervals.  When the radius grows too large, stop and restart the computation with a higher precision.  Repeat until the result is sufficiently accurate.
+
+CDAR uses an iRRAM style evaluation strategy internally and it cannot be easily switched to using fast Cauchy style.  
+Note that "precision" in CDAR corresponds to absolute errors whereas "precision" in iRRAM, AERN2 and MPFR
+corresponds to relative errors.
 
 ### Benchmark results
 
@@ -43,10 +48,11 @@ Results of the "logistic" benchmark, running n iterations of the logistic map wi
 | -------- | ------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | ireal | Cauchy seq. | 0.02 s | 0.51 s / 8&nbsp;MB  | 14.8 s / 22&nbsp;MB  | 628 s / 169&nbsp;MB | | | |
 | aern2 | Cauchy seq. | 0.01 s | 0.03 s / 10&nbsp;MB | 0.1 s  / 15&nbsp;MB  | 0.42 s / 33&nbsp;MB | 3.1 s / 174&nbsp;MB |  18 s / 683&nbsp;MB | 178 s / 5.3&nbsp;GB |
-| ireal | iRRAM-style | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.02 s  / 6&nbsp;MB  | 0.1 s  / 6&nbsp;MB  | 2.3 s / 6&nbsp;MB   | 51 s / 7&nbsp;MB   | 387 s / 9&nbsp;MB   |
-| aern2 | iRRAM-style | 0.01 s | 0.02 s / 7&nbsp;MB  | 0.05 s  / 7&nbsp;MB  | 0.44 s  / 7&nbsp;MB  | 2.3 s /  7&nbsp;MB  | 43 s /  11&nbsp;MB | 903 s / 15&nbsp;MB |
-| ireal | guess prec. | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.01 s  / 6&nbsp;MB  | 0.07 s / 6&nbsp;MB  | 1.2 s / 6&nbsp;MB   | 18 s / 6&nbsp;MB   | 280 s / 9&nbsp;MB   |
-| aern2 | guess prec. | 0.01 s | 0.01 s / 7&nbsp;MB  | 0.02 s  / 8&nbsp;MB  | 0.14 s  / 8&nbsp;MB  | 1.5 s /  8&nbsp;MB  |  20 s /  10&nbsp;MB |  300 s / 11&nbsp;MB |
+| ireal | iRRAM-style (MP1) | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.02 s  / 6&nbsp;MB  | 0.1 s  / 6&nbsp;MB  | 2.3 s / 6&nbsp;MB   | 51 s / 7&nbsp;MB   | 387 s / 9&nbsp;MB   |
+| aern2 | iRRAM-style (MP1) | 0.01 s | 0.02 s / 7&nbsp;MB  | 0.05 s  / 7&nbsp;MB  | 0.44 s  / 7&nbsp;MB  | 2.3 s /  7&nbsp;MB  | 43 s /  11&nbsp;MB | 903 s / 15&nbsp;MB |
+| ireal | guess prec. (MP2) | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.01 s  / 6&nbsp;MB  | 0.07 s / 6&nbsp;MB  | 1.2 s / 6&nbsp;MB   | 18 s / 6&nbsp;MB   | 280 s / 9&nbsp;MB   |
+| aern2 | guess prec. (MP2) | 0.01 s | 0.01 s / 7&nbsp;MB  | 0.02 s  / 8&nbsp;MB  | 0.14 s  / 8&nbsp;MB  | 1.5 s /  8&nbsp;MB  |  20 s /  10&nbsp;MB |  300 s / 11&nbsp;MB |
+| CDAR | iRRAM-style | 0.01 s | 0.01 s / 7&nbsp;MB | 0.01 s  / 8&nbsp;MB  | 0.1 s / 10&nbsp;MB | 1.09 s / 43&nbsp;MB |  17 s / 81&nbsp;MB | 307 s / 146&nbsp;MB |
 
 The charts show a few more data points:
 
@@ -55,8 +61,7 @@ The charts show a few more data points:
 | <img src="benchmarks/charts/logistic-time.png?raw=true" width="400"> | <img src="benchmarks/charts/logistic-space.png?raw=true" width="400"> |
 
 ### TODO
-* include package [CADR](https://github.com/jensblanck/cdar)
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)
 * include package [haskell-fast-reals](https://github.com/comius/haskell-fast-reals)
-* add more benchmarks,eg FFT
+* add more benchmarks,eg FFT, inverting a Hilbert matrix
 * (ongoing) regularly update for newer versions
