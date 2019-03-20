@@ -45,16 +45,18 @@ bench benchS benchParams implS ac =
     (implS ++ ": " ++ resultDecription, benchDecription)
     where
     benchDecription =
-        case (benchS, benchParams) of
+        case (take (length "manydigits") benchS, benchParams) of
             ("logistic", [n]) -> logisticAux n
-            ("manydigits", [problem_number,n]) -> manydigitsAux problem_number n
+            ("manydigits", [n]) -> 
+              let problem_number = read $ drop (length "manydigits") benchS in
+                manydigitsAux problem_number n
             _ ->
                 error $ "unknown benchmark or incorrect number of parameters: " ++ benchS ++ show benchParams
         where
         logisticAux n = TP.taskLogisticDescription n
         manydigitsAux problem_number n = TP.taskManyDigitsDescription problem_number n
     resultDecription =
-        case (benchS, benchParams) of
+        case (take (length "manydigits") benchS, benchParams) of
             ("logistic", [n]) ->
                 case implS of
                     "cdar" -> CDAR.showA . CDAR.limitSize (int acD) . CDAR.require (int acD) $ (TP.taskLogistic n)
@@ -74,8 +76,9 @@ bench benchS benchParams implS ac =
                     "aern2_CRcachedArrow" ->
                       show (taskLogisticCRcachedArrow_TA n ac)
                     _ -> error $ "unknown implementation: " ++ implS
-            ("manydigits", [problem_number, n]) ->
+            ("manydigits", [n]) ->
                 let 
+                  problem_number = read $ drop (length "manydigits") benchS
                   acND = n
                   acN = round ((acND) * 3.32)
                   acNA = bits acN
@@ -110,7 +113,7 @@ taskIRealfromTask ac task =
       _ -> error "taskIRealfromTask failed"
     where
     withP p = 
-      task (setP . P.fromInteger) (setP P.pi) (Just)
+      task (setP . P.fromInteger) (setP P.pi) (setP)
       where
       precIR = bits2dec (integer p)
       setP = Just . IReal.prec precIR 
