@@ -47,10 +47,12 @@ bench benchS benchParams implS ac =
     benchDecription =
         case (benchS, benchParams) of
             ("logistic", [n]) -> logisticAux n
+            ("manydigits", [problem_number,n]) -> manydigitsAux problem_number n
             _ ->
-                error $ "unknown benchmark: " ++ benchS
+                error $ "unknown benchmark or incorrect number of parameters: " ++ benchS ++ show benchParams
         where
         logisticAux n = TP.taskLogisticDescription n
+        manydigitsAux problem_number n = TP.taskManyDigitsDescription problem_number n
     resultDecription =
         case (benchS, benchParams) of
             ("logistic", [n]) ->
@@ -74,27 +76,44 @@ bench benchS benchParams implS ac =
                     _ -> error $ "unknown implementation: " ++ implS
             ("manydigits", [problem_number, n]) ->
                 let 
-                  acND = n 
-                  acN = bits $ round ((acND) * 3.32)
-                  task :: (P.Floating t) => (Integer -> t) -> t
+                  acND = n
+                  acN = round ((acND) * 3.32)
+                  acNA = bits acN
+                  task :: (P.Floating t) => (Integer -> Maybe t) -> Maybe t -> (t -> Maybe t) -> Maybe t
                   task = TP.taskManyDigits problem_number
                   taskPrelude :: (P.Floating t) => t
-                  taskPrelude = task P.fromInteger
+                  taskPrelude = TP.taskManyDigitsSimple problem_number
                 in
                 case implS of
-                    "cdar" -> CDAR.showA . CDAR.limitSize (int acD) . CDAR.require (int acND) $ taskPrelude
-                    "aern2_CR" -> show $ (taskPrelude :: AERN2Real.CauchyReal) AERN2Real.? (accuracySG acN)
-                    "aern2_MP" -> show $ taskMBfromTask acN task
+                    "cdar" -> CDAR.showA . CDAR.limitSize (int acN) . CDAR.require (int acN) $ taskPrelude
+                    "aern2_CR" -> show $ (taskPrelude :: AERN2Real.CauchyReal) AERN2Real.? (accuracySG acNA)
+                    "aern2_MP" -> show $ taskMBfromTask acNA task
+                    "ireal_MP" -> IReal.showIReal (int acND) $ taskIRealfromTask acNA task
                     _ -> error $ "unknown implementation: " ++ implS
             _ -> error ""
     acD = round ((fromAccuracy ac) /! 3.32)
 
-taskMBfromTask :: Accuracy -> ((Integer -> MPBall) -> MPBall) -> MPBall
+taskMBfromTask :: Accuracy -> ((Integer -> Maybe MPBall) -> Maybe MPBall -> (MPBall -> Maybe MPBall) -> Maybe MPBall) -> MPBall
 taskMBfromTask ac task =
     case snd $ last $ MPBall.iterateUntilAccurate ac withP of
       Just r -> r
+      _ -> error "taskMBfromTask failed"
     where
-    withP p = Just $ task (mpBallP p)
+    withP p = 
+      task (Just . mpBallP p) (Just $ MPBall.piBallP p) (Just)
+    -- checkAccuracy
+
+taskIRealfromTask :: Accuracy -> ((Integer -> Maybe IReal) -> Maybe IReal -> (IReal -> Maybe IReal) -> Maybe IReal) -> IReal
+taskIRealfromTask ac task =
+    case snd $ last $ MPBall.iterateUntilAccurate ac withP of
+      Just r -> r
+      _ -> error "taskIRealfromTask failed"
+    where
+    withP p = 
+      task (setP . P.fromInteger) (setP P.pi) (Just)
+      where
+      precIR = bits2dec (integer p)
+      setP = Just . IReal.prec precIR 
 
 taskLogisticCRpureArrow_TA :: Integer -> AERN2Real.CauchyReal
 taskLogisticCRpureArrow_TA n =

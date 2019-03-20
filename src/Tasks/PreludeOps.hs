@@ -3,6 +3,8 @@ module Tasks.PreludeOps where
 import Prelude
 -- import Data.String (fromString)
 
+import Text.Printf
+
 -- Alternative definition with much better space behaviour.
 -- (by Björn von Sydow)
 logisticWithHook :: Num t => (t -> Maybe t) -> t -> Integer -> t -> Maybe t
@@ -43,11 +45,30 @@ taskLogistic :: (Fractional t) => Integer -> t
 taskLogistic n =
     logistic taskLogistic_c n taskLogistic_x0
 
+taskManyDigitsSimple :: (Floating t) => Integer -> t
+taskManyDigitsSimple problem_number =
+    case taskManyDigits problem_number (Just . fromInteger) (Just pi) Just of
+        Just r -> r
+        _ -> error "taskManyDigitsSimple failed"
 
-taskManyDigits :: (Floating t) => Integer -> (Integer -> t) -> t
-taskManyDigits problem_number fromI =
+taskManyDigits :: (Floating t) => Integer -> (Integer -> Maybe t) -> (Maybe t) -> (t -> Maybe t) -> Maybe t
+taskManyDigits problem_number fromI piT filterT =
+    let f1 op x = (op <$> x) >>= filterT in
+    let f2 op x y = (op <$> x <*> y) >>= filterT in
     case problem_number of
-        1 -> sin(tan(cos(fromI 1)))
-        2 -> sqrt((exp 1)/pi)
+        1 -> f1 sin $ f1 tan $ f1 cos $ fromI 1
+        2 -> f1 sqrt $ f2 (/) (f1 exp  $ fromI 1) piT
+        3 -> f1 sin  $ f1 (^(3::Int)) $ f2 (+) (fromI 1) (f1 exp  $ fromI 1)
+        4 -> f1 exp $ f2 (*) (f1 sqrt $ fromI 2011) piT
+        5 -> f1 exp $ f1 exp $ f1 sqrt $ f1 exp $ fromI 1
+        7 -> f1 (^(1000::Int)) piT
+        8 -> f1 sin $ fromI $ 6^(6^(6 :: Int) :: Integer)
         _ -> error "Unknown/unimplemented many digits problem."
     
+taskManyDigitsDescription :: Integer -> Integer -> String
+taskManyDigitsDescription problem_number n =
+    printf 
+        ("Problem C%d with accuracy of %d decimal digits\n" ++ 
+         " from the \"Many Digits\" competition\n" ++ 
+         " (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806)") 
+        problem_number n
