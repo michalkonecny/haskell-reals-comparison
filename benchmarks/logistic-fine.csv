@@ -99,7 +99,6 @@ Wed 20 Mar 16:22:05 GMT 2019,logistic,42100,aern2_CDAR_MP1,100,,53.73,0.03,10716
 Wed 20 Mar 16:22:05 GMT 2019,logistic,56200,aern2_CDAR_MP1,100,,216.17,0.16,11748
 Wed 20 Mar 16:22:05 GMT 2019,logistic,74900,aern2_CDAR_MP1,100,,254.73,0.18,11844
 Wed 20 Mar 16:22:05 GMT 2019,logistic,100000,aern2_CDAR_MP1,100,,1024.51,0.61,11892
-Time,Bench,BenchParams,Method,AccuracyTarget(bits),Accuracy(bits),UTime(s),STime(s),Mem(kB)
 Wed 20 Mar 13:32:18 GMT 2019,logistic,100,cdar,100,,0.01,0.01,7144
 Wed 20 Mar 13:32:18 GMT 2019,logistic,133,cdar,100,,0.01,0.01,7224
 Wed 20 Mar 13:32:18 GMT 2019,logistic,177,cdar,100,,0.01,0.01,7352
