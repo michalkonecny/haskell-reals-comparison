@@ -72,8 +72,29 @@ bench benchS benchParams implS ac =
                     "aern2_CRcachedArrow" ->
                       show (taskLogisticCRcachedArrow_TA n ac)
                     _ -> error $ "unknown implementation: " ++ implS
+            ("manydigits", [problem_number, n]) ->
+                let 
+                  acND = n 
+                  acN = bits $ round ((acND) * 3.32)
+                  task :: (P.Floating t) => (Integer -> t) -> t
+                  task = TP.taskManyDigits problem_number
+                  taskPrelude :: (P.Floating t) => t
+                  taskPrelude = task P.fromInteger
+                in
+                case implS of
+                    "cdar" -> CDAR.showA . CDAR.limitSize (int acD) . CDAR.require (int acND) $ taskPrelude
+                    "aern2_CR" -> show $ (taskPrelude :: AERN2Real.CauchyReal) AERN2Real.? (accuracySG acN)
+                    "aern2_MP" -> show $ taskMBfromTask acN task
+                    _ -> error $ "unknown implementation: " ++ implS
             _ -> error ""
     acD = round ((fromAccuracy ac) /! 3.32)
+
+taskMBfromTask :: Accuracy -> ((Integer -> MPBall) -> MPBall) -> MPBall
+taskMBfromTask ac task =
+    case snd $ last $ MPBall.iterateUntilAccurate ac withP of
+      Just r -> r
+    where
+    withP p = Just $ task (mpBallP p)
 
 taskLogisticCRpureArrow_TA :: Integer -> AERN2Real.CauchyReal
 taskLogisticCRpureArrow_TA n =

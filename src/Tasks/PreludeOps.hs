@@ -42,3 +42,12 @@ taskLogisticWithHook n hook c x0 =
 taskLogistic :: (Fractional t) => Integer -> t
 taskLogistic n =
     logistic taskLogistic_c n taskLogistic_x0
+
+
+taskManyDigits :: (Floating t) => Integer -> (Integer -> t) -> t
+taskManyDigits problem_number fromI =
+    case problem_number of
+        1 -> sin(tan(cos(fromI 1)))
+        2 -> sqrt((exp 1)/pi)
+        _ -> error "Unknown/unimplemented many digits problem."
+    

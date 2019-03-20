@@ -1,20 +1,20 @@
 taskLogistic1: 4210 iterations of logistic map with c = 3.82 and x0 = 0.125
-aern2_CR: [0.687921400970815033302856962843 ± <2^(-119)]
-	Command being timed: "haskell-reals-comparison logistic 4210 aern2_CR 100"
-	User time (seconds): 0.60
+aern2_CR: [0.687921400970815033302856962843166748758697428354384950996016196119455261742997230747525445914934322785483335532518394372100154063666033192675671127495016738526379569553223075199172094097025318550167636361044066815473693125359673650858188271491770018468080881961165250226987850174537329963269311325987887007719175386386 ± <2^(-119)]
+	Command being timed: "haskell-reals-comparison-mpfr-origcdar logistic 4210 aern2_CR 100"
+	User time (seconds): 1.20
 	System time (seconds): 0.02
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.62
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.22
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 55208
+	Maximum resident set size (kbytes): 61848
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 12329
+	Minor (reclaiming a frame) page faults: 13843
 	Voluntary context switches: 1
-	Involuntary context switches: 3
+	Involuntary context switches: 1
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 8

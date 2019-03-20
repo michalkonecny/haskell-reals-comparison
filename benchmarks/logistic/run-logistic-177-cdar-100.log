@@ -1,6 +1,6 @@
 taskLogistic1: 177 iterations of logistic map with c = 3.82 and x0 = 0.125
 cdar: 0.29330681~
-	Command being timed: "haskell-reals-comparison logistic 177 cdar 100"
+	Command being timed: "haskell-reals-comparison-mpfr-origcdar logistic 177 cdar 100"
 	User time (seconds): 0.00
 	System time (seconds): 0.00
 	Percent of CPU this job got: 100%
@@ -9,12 +9,12 @@ cdar: 0.29330681~
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 6640
+	Maximum resident set size (kbytes): 7352
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 443
+	Minor (reclaiming a frame) page faults: 553
 	Voluntary context switches: 1
-	Involuntary context switches: 1
+	Involuntary context switches: 0
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 8
