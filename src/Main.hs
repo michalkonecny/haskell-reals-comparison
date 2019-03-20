@@ -103,7 +103,7 @@ taskMBfromTask ac task =
       _ -> error "taskMBfromTask failed"
     where
     withP p = 
-      task (Just . mpBallP p) (Just $ MPBall.piBallP p) (Just)
+      task (Just . mpBallP p) (Just $ MPBall.piBallP p) (Just . AERN2Real.setPrecision p)
     -- checkAccuracy
 
 taskIRealfromTask :: Accuracy -> ((Integer -> Maybe IReal) -> Maybe IReal -> (IReal -> Maybe IReal) -> Maybe IReal) -> IReal
