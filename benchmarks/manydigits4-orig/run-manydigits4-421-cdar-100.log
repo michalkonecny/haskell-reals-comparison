@@ -1,0 +1,27 @@
+Problem C4 with accuracy of 421 decimal digits
+ from the "Many Digits" competition
+ (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806)
+cdar: 15287325030838530726060718956632626460288135250495712354991535.089112926810993189125490022266549644032316160083751426018765744171660575514435408887164154423435865181895721546322425783134766799065511421486925983756621072049092899466406015827104366125187328124932847372532813522223069958640272384088505453864054668186592315024531928788389250226183540620114634232020298952821529166923732362812709520869268240400184797209223370526334777285519218147418726856525267787007944941653746696247~
+	Command being timed: "haskell-reals-comparison-mpfr-origcdar manydigits4 421 cdar 100"
+	User time (seconds): 0.01
+	System time (seconds): 0.00
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9500
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 976
+	Voluntary context switches: 1
+	Involuntary context switches: 0
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

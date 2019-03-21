@@ -1,0 +1,27 @@
+Problem C5 with accuracy of 100 decimal digits
+ from the "Many Digits" competition
+ (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806)
+aern2_CR: [181.33130360854569351505757451265398380886369247851475927943927001318125921908186541553416582165703293251088841087071873046233251189515038567199324160997420994495975880355712700045250211999180684828099158468329356813320707414518039249857878168920203461870714496016803312260380559541677154551544334908994353476571629681899873838474631831881458256315550661374525421037243692548514008285176849350132004970172645961006855744362638 ± <2^(-342)]
+	Command being timed: "haskell-reals-comparison-mpfr-origcdar manydigits5 100 aern2_CR 100"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 66%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8948
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 450
+	Voluntary context switches: 1
+	Involuntary context switches: 0
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

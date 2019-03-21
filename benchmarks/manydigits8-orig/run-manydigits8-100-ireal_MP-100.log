@@ -1,0 +1,27 @@
+Problem C8 with accuracy of 100 decimal digits
+ from the "Many Digits" competition
+ (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806)
+ireal_MP: 0.9539537434573206352492111434055253425811857636511822065161716596988369691845451204872928519972839962
+	Command being timed: "haskell-reals-comparison-mpfr-origcdar manydigits8 100 ireal_MP 100"
+	User time (seconds): 0.91
+	System time (seconds): 0.00
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.91
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15848
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2582
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

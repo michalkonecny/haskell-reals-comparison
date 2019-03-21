@@ -63,14 +63,6 @@ function getDataFromRunlog
 
 function runForAllMethods
 {
-  if [ "$method_cdar_bparamss" != "" ]; then
-    method="cdar"; bparamss="$method_cdar_bparamss" method_cdar_bparamss=""
-    runForBenchParamss
-  fi
-  if [ "$method_cdar_mBound_bparamss" != "" ]; then
-    method="cdar"; bparamss="$method_cdar_mBound_bparamss" method_cdar_mBound_bparamss=""
-    runForBenchParamss
-  fi
   if [ "$method_ireal_CR_bparamss" != "" ]; then
     method="ireal_CR"; bparamss="$method_ireal_CR_bparamss" method_ireal_CR_bparamss=""
     runForBenchParamss
@@ -87,14 +79,6 @@ function runForAllMethods
     method="ireal_MP2"; bparamss="$method_ireal_MP2_bparamss" method_ireal_MP2_bparamss=""
     runForBenchParamss
   fi
-  # if [ "$method_aern2_CR_Prelude_bparamss" != "" ]; then
-  #   method="aern2_CR_preludeOps"; bparamss="$method_aern2_CR_Prelude_bparamss" method_aern2_CR_Prelude_bparamss=""
-  #   runForBenchParamss
-  # fi
-  # if [ "$method_aern2_MP_Prelude_bparamss" != "" ]; then
-  #   method="aern2_MP_preludeOps"; bparamss="$method_aern2_MP_Prelude_bparamss" method_aern2_MP_Prelude_bparamss=""
-  #   runForBenchParamss
-  # fi
   if [ "$method_aern2_CR_bparamss" != "" ]; then
     method="aern2_CR"; bparamss="$method_aern2_CR_bparamss" method_aern2_CR_bparamss=""
     runForBenchParamss
@@ -109,6 +93,10 @@ function runForAllMethods
   fi
   if [ "$method_aern2_MP2_bparamss" != "" ]; then
     method="aern2_MP2"; bparamss="$method_aern2_MP2_bparamss" method_aern2_MP2_bparamss=""
+    runForBenchParamss
+  fi
+  if [ "$method_cdar_bparamss" != "" ]; then
+    method="cdar"; bparamss="$method_cdar_bparamss" method_cdar_bparamss=""
     runForBenchParamss
   fi
 }
@@ -157,5 +145,37 @@ function logisticAllMethods
   runForAllMethods
 }
 
+function manydigitsAllMethodsFine
+{
+  steps100="100 133 177 237 316 421 562 749"
+  steps1000="1000 1330 1770 2370 3160 4210 5620 7490"
+  steps10000="10000 13300 17700 23700 31600 42100 56200 74900"
+
+  method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_aern2_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_cdar_bparamss="$steps100 $steps1000 10000";
+  # method_cdar_bparamss="$steps100 $steps1000 $steps10000 100000";
+
+  bench="manydigits$problem_number"; dir="$bench";
+  params="100";
+  runForAllMethods
+}
+
+
 # logisticAllMethods
-logisticAllMethodsFine
+# logisticAllMethodsFine
+problem_number=1
+manydigitsAllMethodsFine
+problem_number=2
+manydigitsAllMethodsFine
+problem_number=3
+manydigitsAllMethodsFine
+problem_number=4
+manydigitsAllMethodsFine
+problem_number=5
+manydigitsAllMethodsFine
+problem_number=7
+manydigitsAllMethodsFine
+problem_number=8
+manydigitsAllMethodsFine
