@@ -151,11 +151,11 @@ function manydigitsAllMethodsFine
   steps1000="1000 1330 1770 2370 3160 4210 5620 7490"
   steps10000="10000 13300 17700 23700 31600 42100 56200 74900"
 
-  method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000"; # 100000";
   method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
   method_aern2_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
-  method_cdar_bparamss="$steps100 $steps1000 10000";
-  # method_cdar_bparamss="$steps100 $steps1000 $steps10000 100000";
+  #method_cdar_bparamss="$steps100 $steps1000 10000";
+  method_cdar_bparamss="$steps100 $steps1000 $steps10000 100000";
 
   bench="manydigits$problem_number"; dir="$bench";
   params="100";
@@ -165,17 +165,17 @@ function manydigitsAllMethodsFine
 
 # logisticAllMethods
 # logisticAllMethodsFine
-problem_number=1
-manydigitsAllMethodsFine
+#problem_number=1
+#manydigitsAllMethodsFine
 problem_number=2
 manydigitsAllMethodsFine
-problem_number=3
-manydigitsAllMethodsFine
+#problem_number=3
+#manydigitsAllMethodsFine
 problem_number=4
 manydigitsAllMethodsFine
 problem_number=5
 manydigitsAllMethodsFine
 problem_number=7
 manydigitsAllMethodsFine
-problem_number=8
-manydigitsAllMethodsFine
+#problem_number=8
+#manydigitsAllMethodsFine

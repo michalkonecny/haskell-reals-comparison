@@ -1,0 +1,27 @@
+Problem C5 with accuracy of 177 decimal digits
+ from the "Many Digits" competition
+ (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806)
+aern2_MP: [181.3313036085456935150575745126539838088636924785147592794392700131812592190818654155341658216570329325108743096691386367375909946349461876923440308940236213322686562398986125196682796842165682762711217052709695444923158575519486873912033980012650240425556755921049094872596597290919348610053760680068100616956372981827025640066038800899112172885856714721826980436971119193627405773689169333013591396687194580831532834408088992213399088019088411227210706771491423986235166336406504242490509899347179701169768104245136700328078348533058433101080389299714366418486838177169778356229409006067886112045783875146298669278621673583984375 ± <2^(-625)]
+	Command being timed: "haskell-reals-comparison-cdar-mbound manydigits5 177 aern2_MP 100"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8180
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 553
+	Voluntary context switches: 1
+	Involuntary context switches: 0
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
