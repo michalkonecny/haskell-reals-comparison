@@ -49,6 +49,19 @@ corresponds to relative errors.  CDAR-mBound is a version with an additional flo
 
 ## Benchmark results
 
+### Selected 2005 "Many digits: friendly competition" tasks
+
+#### Task C1
+
+![C1](http://latex.codecogs.com/gif.latex?\\sin(\\tan(\\cos(1))))
+
+| Execution time | Max RAM use |
+| :---: | :---: |
+| <img src="benchmarks/charts/manydigits1-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits1-fine-space.png?raw=true" width="400"> |
+
+
+### Logistic map iteration
+
 Results of the "logistic" benchmark, running n iterations of the logistic map with c=3.82 and x0=0.125.
 
 | Implementation | strategy | n=100 | n=316 | n=1000 | n=3160 | n=10000  | n=31600 | n=100000 |
