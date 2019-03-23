@@ -51,6 +51,8 @@ corresponds to relative errors.  CDAR-mBound is a version with an additional flo
 
 ### Selected 2005 "Many digits: friendly competition" tasks
 
+The competition is documented in [this paper](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806).
+
 #### Task C1
 
 ![C1](http://latex.codecogs.com/gif.latex?\\sin(\\tan(\\cos(1))))
@@ -58,6 +60,53 @@ corresponds to relative errors.  CDAR-mBound is a version with an additional flo
 | Execution time | Max RAM use |
 | :---: | :---: |
 | <img src="benchmarks/charts/manydigits1-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits1-fine-space.png?raw=true" width="400"> |
+
+Note that cdar_mBound and its dependencies are not currently featured in this benchmark.  
+This is due to an accuracy bug in cdar_mBound's sine and cosine.  Hopefully this will be fixed soon.
+
+#### Task C2
+
+![C2](http://latex.codecogs.com/gif.latex?\\sqrt{\\frac{e}{\pi}})
+
+| Execution time | Max RAM use |
+| :---: | :---: |
+| <img src="benchmarks/charts/manydigits2-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits2-fine-space.png?raw=true" width="400"> |
+
+
+#### Task C3
+
+![C3](http://latex.codecogs.com/gif.latex?\\sin((e+1)^3))
+
+| Execution time | Max RAM use |
+| :---: | :---: |
+| <img src="benchmarks/charts/manydigits3-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits3-fine-space.png?raw=true" width="400"> |
+
+#### Task C4
+
+![C4](http://latex.codecogs.com/gif.latex?e^{\pi \cdot \\sqrt{2011}})
+
+| Execution time | Max RAM use |
+| :---: | :---: |
+| <img src="benchmarks/charts/manydigits4-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits4-fine-space.png?raw=true" width="400"> |
+
+#### Task C5
+
+![C5](http://latex.codecogs.com/gif.latex?e^{e^{\\sqrt{e}}})
+
+| Execution time | Max RAM use |
+| :---: | :---: |
+| <img src="benchmarks/charts/manydigits5-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits5-fine-space.png?raw=true" width="400"> |
+
+#### Task C7
+
+![C7](http://latex.codecogs.com/gif.latex?\pi^{1000})
+
+| Execution time | Max RAM use |
+| :---: | :---: |
+| <img src="benchmarks/charts/manydigits7-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits7-fine-space.png?raw=true" width="400"> |
+
+
+
 
 
 ### Logistic map iteration
