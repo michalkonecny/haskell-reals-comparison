@@ -66,7 +66,7 @@ This is due to an accuracy bug in cdar_mBound's sine and cosine.  Hopefully this
 
 #### Task C2
 
-![C2](http://latex.codecogs.com/gif.latex?\\sqrt{\\frac{e}{\pi}})
+![C2](http://latex.codecogs.com/gif.latex?\\sqrt{\\frac{e}{\\pi}})
 
 | Execution time | Max RAM use |
 | :---: | :---: |
@@ -83,7 +83,7 @@ This is due to an accuracy bug in cdar_mBound's sine and cosine.  Hopefully this
 
 #### Task C4
 
-![C4](http://latex.codecogs.com/gif.latex?e^{\pi \cdot \\sqrt{2011}})
+![C4](http://latex.codecogs.com/gif.latex?e^{\\pi \\cdot \\sqrt{2011}})
 
 | Execution time | Max RAM use |
 | :---: | :---: |
@@ -99,7 +99,7 @@ This is due to an accuracy bug in cdar_mBound's sine and cosine.  Hopefully this
 
 #### Task C7
 
-![C7](http://latex.codecogs.com/gif.latex?\pi^{1000})
+![C7](http://latex.codecogs.com/gif.latex?\\pi^{1000})
 
 | Execution time | Max RAM use |
 | :---: | :---: |
