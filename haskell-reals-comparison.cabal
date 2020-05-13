@@ -5,7 +5,7 @@ build-type:     Simple
 homepage:       https://github.com/michalkonecny/aern2/aern2-mp
 author:         Michal Konecny, Björn von Sydow
 maintainer:     Michal Konecny <mikkonecny@gmail.com>
-copyright:      (c) 2015-2017 Michal Konecny
+copyright:      (c) 2015-2019 Michal Konecny
 license:        BSD3
 license-file:   LICENSE
 stability:      experimental
@@ -16,7 +16,7 @@ Description:    Comparison of Haskell exact real number implementations
 executable haskell-reals-comparison
   build-depends:
     base >= 4
-    , mixed-types-num >= 0.3.1 && < 0.4
+    , mixed-types-num >= 0.4
     , aern2-mp == 0.1.*
     , aern2-real == 0.1.*
     -- , exact-real
