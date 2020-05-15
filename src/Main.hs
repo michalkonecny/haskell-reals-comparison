@@ -205,6 +205,8 @@ setPAndCheckAccuracyIReal ac p rB
 bits2dec :: Integer -> Int
 bits2dec b = int $ round $ b /! 3.32
 
+instance AERN2Real.HasPrecision IReal where
+
 instance AERN2Real.HasAccuracy IReal where
   getAccuracy rB
     | rdIsZero = AERN2Real.Exact
