@@ -1,17 +1,17 @@
 #!/bin/bash
 
-resultscsv=$1
-if [ "$resultscsv" == "" ]; then echo "usage: $0 <results csv file name>"; exit 1; fi
+results_file=$1
+if [ "$results_file" == "" ]; then echo "usage: $0 <results csv file name>"; exit 1; fi
 
-#benchmain=haskell-reals-comparison
+benchmain=haskell-reals-comparison
 #benchmain=haskell-reals-comparison-mpfr-origcdar
-benchmain=haskell-reals-comparison-cdar-mbound
+# benchmain=haskell-reals-comparison-cdar-mbound
 
 reuselogs="true"
 
 # put headers in the results csv file if it is new:
-if [ ! -f $resultscsv ]
-    then echo "Time,Bench,BenchParams,Method,AccuracyTarget(bits),Accuracy(bits),UTime(s),STime(s),Mem(kB)" > $resultscsv
+if [ ! -f $results_file ]
+    then echo "Time,Bench,BenchParams,Method,AccuracyTarget(bits),Accuracy(bits),UTime(s),STime(s),Mem(kB)" > $results_file
     if [ $? != 0 ]; then exit 1; fi
 fi
 
@@ -58,25 +58,29 @@ function getDataFromRunlog
   exact=`grep -i "accuracy: Exact" $runlog | sed 's/accuracy: Exact/exact/'`
   bits=`grep -i "accuracy: bits " $runlog | sed 's/accuracy: [bB]its //'`
   now=`date`
-  echo "$now,$bench,$benchParams,$method,$params,$exact$bits,${utime/0.00/0.01},${stime/0.00/0.01},$mem" >> $resultscsv
+  echo "$now,$bench,$benchParams,$method,$params,$exact$bits,${utime/0.00/0.01},${stime/0.00/0.01},$mem" >> $results_file
 }
 
 function runForAllMethods
 {
-  if [ "$method_ireal_CR_bparamss" != "" ]; then
-    method="ireal_CR"; bparamss="$method_ireal_CR_bparamss" method_ireal_CR_bparamss=""
-    runForBenchParamss
-  fi
-  if [ "$method_ireal_MP_bparamss" != "" ]; then
-    method="ireal_MP"; bparamss="$method_ireal_MP_bparamss" method_ireal_MP_bparamss=""
-    runForBenchParamss
-  fi
-  if [ "$method_ireal_MP1_bparamss" != "" ]; then
-    method="ireal_MP1"; bparamss="$method_ireal_MP1_bparamss" method_ireal_MP1_bparamss=""
-    runForBenchParamss
-  fi
-  if [ "$method_ireal_MP2_bparamss" != "" ]; then
-    method="ireal_MP2"; bparamss="$method_ireal_MP2_bparamss" method_ireal_MP2_bparamss=""
+  # if [ "$method_ireal_CR_bparamss" != "" ]; then
+  #   method="ireal_CR"; bparamss="$method_ireal_CR_bparamss" method_ireal_CR_bparamss=""
+  #   runForBenchParamss
+  # fi
+  # if [ "$method_ireal_MP_bparamss" != "" ]; then
+  #   method="ireal_MP"; bparamss="$method_ireal_MP_bparamss" method_ireal_MP_bparamss=""
+  #   runForBenchParamss
+  # fi
+  # if [ "$method_ireal_MP1_bparamss" != "" ]; then
+  #   method="ireal_MP1"; bparamss="$method_ireal_MP1_bparamss" method_ireal_MP1_bparamss=""
+  #   runForBenchParamss
+  # fi
+  # if [ "$method_ireal_MP2_bparamss" != "" ]; then
+  #   method="ireal_MP2"; bparamss="$method_ireal_MP2_bparamss" method_ireal_MP2_bparamss=""
+  #   runForBenchParamss
+  # fi
+  if [ "$method_cdar_bparamss" != "" ]; then
+    method="cdar_mBound"; bparamss="$method_cdar_bparamss" method_cdar_bparamss=""
     runForBenchParamss
   fi
   if [ "$method_aern2_CR_bparamss" != "" ]; then
@@ -95,10 +99,6 @@ function runForAllMethods
     method="aern2_MP2"; bparamss="$method_aern2_MP2_bparamss" method_aern2_MP2_bparamss=""
     runForBenchParamss
   fi
-  if [ "$method_cdar_bparamss" != "" ]; then
-    method="cdar"; bparamss="$method_cdar_bparamss" method_cdar_bparamss=""
-    runForBenchParamss
-  fi
 }
 
 #################
@@ -112,14 +112,14 @@ function logisticAllMethodsFine
   steps10000="10000 13300 17700 23700 31600 42100 56200 74900"
 
   method_cdar_bparamss="$steps100 $steps1000 $steps10000 100000";
-  #method_cdar_mBound_bparamss="$steps100 $steps1000 $steps10000 100000";
+  # method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000 100000";
+  # method_aern2_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
+
   #method_ireal_CR_bparamss="$steps100 1000 1330 1770 2370 3160 4210";
-  method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000 100000";
   # method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
-  method_ireal_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
+  # method_ireal_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
   #method_ireal_MP2_bparamss="$steps100 $steps1000 $steps10000 100000";
   # method_aern2_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
-  method_aern2_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
   #method_aern2_MP2_bparamss="$steps100 $steps1000 $steps10000 100000";
 
   bench="logistic"; dir="$bench";
@@ -134,7 +134,7 @@ function logisticAllMethods
   #method_ireal_CR_bparamss="100 316 1000 3160";
   method_aern2_CR_bparamss="100 316 1000 3160 10000 31600 100000";
   # method_ireal_MP_bparamss="100 316 1000 3160 10000 31600 100000";
-  method_ireal_MP1_bparamss="100 316 1000 3160 10000 31600 100000";
+  # method_ireal_MP1_bparamss="100 316 1000 3160 10000 31600 100000";
   #method_ireal_MP2_bparamss="100 316 1000 3160 10000 31600 100000";
   # method_aern2_MP_bparamss="100 316 1000 3160 10000 31600 100000";
   method_aern2_MP1_bparamss="100 316 1000 3160 10000 31600 100000";
@@ -151,11 +151,11 @@ function manydigitsAllMethodsFine
   steps1000="1000 1330 1770 2370 3160 4210 5620 7490"
   steps10000="10000 13300 17700 23700 31600 42100 56200 74900"
 
+  method_cdar_bparamss="$steps100 $steps1000 $steps10000 100000";
   method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000"; # 100000";
-  method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
+  # method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
   method_aern2_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
   #method_cdar_bparamss="$steps100 $steps1000 10000";
-  method_cdar_bparamss="$steps100 $steps1000 $steps10000 100000";
 
   bench="manydigits$problem_number"; dir="$bench";
   params="100";
@@ -165,12 +165,12 @@ function manydigitsAllMethodsFine
 
 # logisticAllMethods
 # logisticAllMethodsFine
-#problem_number=1
-#manydigitsAllMethodsFine
+problem_number=1
+manydigitsAllMethodsFine
 problem_number=2
 manydigitsAllMethodsFine
-#problem_number=3
-#manydigitsAllMethodsFine
+problem_number=3
+manydigitsAllMethodsFine
 problem_number=4
 manydigitsAllMethodsFine
 problem_number=5

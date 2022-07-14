@@ -1,18 +1,18 @@
 taskLogistic1: 316 iterations of logistic map with c = 3.82 and x0 = 0.125
-aern2_CR: [0.48450672077951711205705459113053918468856183774791900389559373215377895070087614112227588594346557850435621623906822813958675307432317007312956391018358871857715706267393120337838507738534445959070102453890789802942259354596021 ± <2^(-119)]
-	Command being timed: "haskell-reals-comparison-mpfr-origcdar logistic 316 aern2_CR 100"
-	User time (seconds): 0.07
+aern2_CR: [0.48450672077951711205705459... ± ~6.6173e-47 ~2^(-153)]
+	Command being timed: "haskell-reals-comparison logistic 316 aern2_CR 100"
+	User time (seconds): 0.01
 	System time (seconds): 0.00
-	Percent of CPU this job got: 100%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.08
+	Percent of CPU this job got: 93%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 10788
+	Maximum resident set size (kbytes): 8652
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 1087
+	Minor (reclaiming a frame) page faults: 836
 	Voluntary context switches: 1
 	Involuntary context switches: 0
 	Swaps: 0
