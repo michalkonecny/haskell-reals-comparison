@@ -1,7 +1,7 @@
 #!/bin/bash
 
 results_file=$1
-if [ "$results_file" == "" ]; then echo "usage: $0 <results csv file name>"; exit 1; fi
+if [ "$results_file" == "" ]; then echo "usage: $0 <results JS file name>"; exit 1; fi
 
 benchmain=haskell-reals-comparison
 #benchmain=haskell-reals-comparison-mpfr-origcdar
@@ -11,7 +11,7 @@ reuselogs="true"
 
 # put headers in the results csv file if it is new:
 if [ ! -f $results_file ]
-    then echo "Time,Bench,BenchParams,Method,AccuracyTarget(bits),Accuracy(bits),UTime(s),STime(s),Mem(kB)" > $results_file
+    then echo "const allData = [" > $results_file
     if [ $? != 0 ]; then exit 1; fi
 fi
 
@@ -58,8 +58,10 @@ function getDataFromRunlog
   exact=`grep -i "accuracy: Exact" $runlog | sed 's/accuracy: Exact/exact/'`
   bits=`grep -i "accuracy: bits " $runlog | sed 's/accuracy: [bB]its //'`
   now=`date`
-  echo "$now,$bench,$benchParams,$method,$params,$exact$bits,${utime/0.00/0.01},${stime/0.00/0.01},$mem" >> $results_file
+  echo "{time: \"$now\", bench: \"$bench\", param: $benchParams, method: \"$method\", utime: ${utime/0.00/0.01}, stime: ${stime/0.00/0.01}, mem: $mem }," >> $results_file
 }
+
+# Time,Bench,BenchParams,Method,AccuracyTarget(bits),Accuracy(bits),UTime(s),STime(s),Mem(kB)
 
 function runForAllMethods
 {
@@ -112,8 +114,8 @@ function logisticAllMethodsFine
   steps10000="10000 13300 17700 23700 31600 42100 56200 74900"
 
   method_cdar_bparamss="$steps100 $steps1000 $steps10000 100000";
-  # method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000 100000";
-  # method_aern2_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000 100000";
+  method_aern2_MP1_bparamss="$steps100 $steps1000 $steps10000 100000";
 
   #method_ireal_CR_bparamss="$steps100 1000 1330 1770 2370 3160 4210";
   # method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
@@ -164,7 +166,7 @@ function manydigitsAllMethodsFine
 
 
 # logisticAllMethods
-# logisticAllMethodsFine
+logisticAllMethodsFine
 problem_number=1
 manydigitsAllMethodsFine
 problem_number=2
