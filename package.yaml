@@ -1,0 +1,44 @@
+name:                haskell-reals-comparison
+version:             0.1.1.0
+github:              "michalkonecny/haskell-reals-comparison"
+license:             BSD3
+author:              "Michal Konecny"
+maintainer:          "mikkonecny@gmail.com"
+copyright:           "2015-2022 Michal Konecny"
+
+# extra-source-files:
+# - README.md
+# - changelog.md
+
+# Metadata used when publishing your package
+synopsis:            comparison of Haskell exact real number implementations
+category:            Math
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/michalkonecny/haskell-reals-comparison/#readme>
+
+dependencies:
+- base == 4.*
+- containers
+- psqueues
+- hspec
+- QuickCheck
+- collect-errors >= 0.1.5
+- mixed-types-num >= 0.5.9
+# - integer-logarithms
+- aern2-mp >= 0.2.9
+- aern2-real >= 0.2.9
+- cdar-mBound >= 0.1.0.4
+
+default-extensions:
+- RebindableSyntax
+
+executables:
+  haskell-reals-comparison:
+    source-dirs: 
+    - src
+    main: Main.hs
+    ghc-options:
+    - -O2 -Wall -rtsopts

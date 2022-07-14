@@ -1,33 +1,47 @@
-Name:           haskell-reals-comparison
-version:        0.1.0.0
-cabal-version:  >= 1.9.2
-build-type:     Simple
-homepage:       https://github.com/michalkonecny/aern2/aern2-mp
-author:         Michal Konecny, Björn von Sydow
-maintainer:     Michal Konecny <mikkonecny@gmail.com>
-copyright:      (c) 2015-2019 Michal Konecny
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           haskell-reals-comparison
+version:        0.1.1.0
+synopsis:       comparison of Haskell exact real number implementations
+description:    Please see the README on GitHub at <https://github.com/michalkonecny/haskell-reals-comparison/#readme>
+category:       Math
+homepage:       https://github.com/michalkonecny/haskell-reals-comparison#readme
+bug-reports:    https://github.com/michalkonecny/haskell-reals-comparison/issues
+author:         Michal Konecny
+maintainer:     mikkonecny@gmail.com
+copyright:      2015-2022 Michal Konecny
 license:        BSD3
 license-file:   LICENSE
-stability:      experimental
-category:       Math
-Synopsis:       comparison of Haskell exact real number implementations
-Description:    Comparison of Haskell exact real number implementations
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/michalkonecny/haskell-reals-comparison
 
 executable haskell-reals-comparison
-  build-depends:
-    base >= 4
-    , mixed-types-num >= 0.4
-    , aern2-mp == 0.1.*
-    , aern2-real == 0.1.*
-    -- , exact-real
-    , ireal
-    , cdar
-  hs-source-dirs:  src
-  ghc-options:     -O2 -Wall -rtsopts
-  extensions:
-                    RebindableSyntax
-  other-modules:
-                 Tasks.MixedTypesNumOps,
-                 Tasks.PreludeOps,
-                 Tasks.IRealOps
   main-is: Main.hs
+  other-modules:
+      Tasks.MixedTypesNumOps
+      Tasks.PreludeOps
+      Paths_haskell_reals_comparison
+  hs-source-dirs:
+      src
+  default-extensions:
+      RebindableSyntax
+  ghc-options: -O2 -Wall -rtsopts
+  build-depends:
+      QuickCheck
+    , aern2-mp >=0.2.9
+    , aern2-real >=0.2.9
+    , base ==4.*
+    , cdar-mBound >=0.1.0.4
+    , collect-errors >=0.1.5
+    , containers
+    , hspec
+    , mixed-types-num >=0.5.9
+    , psqueues
+  default-language: Haskell2010
