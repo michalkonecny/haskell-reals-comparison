@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="benchmarks/all.js"></script>
+
+<body>
+
+  <table style="width:100%">
+    <tr>
+      <td>
+        <div id="logisticTimePlot"></div>
+      </td>
+      <td>
+        <div id="logisticMemPlot"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="manydigits1TimePlot"></div>
+      </td>
+      <td>
+        <div id="manydigits1MemPlot"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="manydigits2TimePlot"></div>
+      </td>
+      <td>
+        <div id="manydigits2MemPlot"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="manydigits3TimePlot"></div>
+      </td>
+      <td>
+        <div id="manydigits3MemPlot"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="manydigits4TimePlot"></div>
+      </td>
+      <td>
+        <div id="manydigits4MemPlot"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="manydigits5TimePlot"></div>
+      </td>
+      <td>
+        <div id="manydigits5MemPlot"></div>
+      </td>
+    </tr>
+    <!-- <tr>
+      <td>
+        <div id="manydigits6TimePlot"></div>
+      </td>
+      <td>
+        <div id="manydigits6MemPlot"></div>
+      </td>
+    </tr> -->
+    <tr>
+      <td>
+        <div id="manydigits7TimePlot"></div>
+      </td>
+      <td>
+        <div id="manydigits7MemPlot"></div>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    const config = { responsive: true }
+
+    // index the data by benchmark and method:
+    var dataByBenchMethod = {}
+    allData.forEach(rec => {
+      // fetch/create matching benchmark dictionary
+      if (dataByBenchMethod[rec.bench] == undefined) {
+        dataByBenchMethod[rec.bench] = {}
+      }
+      const benchDict = dataByBenchMethod[rec.bench]
+
+      // fetch/create matching method list
+      if (benchDict[rec.method] == undefined) {
+        benchDict[rec.method] = []
+      }
+      const benchMethodList = benchDict[rec.method]
+
+      // add this record to the list:
+      benchMethodList.push(rec)
+    });
+
+    console.log(dataByBenchMethod);
+
+    function plotsForBench(bench, benchLabel, xName) {
+      const dataByMethod = dataByBenchMethod[bench]
+
+      var dataTime = []
+      var dataMem = []
+
+      // for each method:
+      Object.keys(dataByMethod).forEach(method => {
+        const recs = dataByMethod[method]
+
+        // extract from all records the plot data:
+        var params = [];
+        var times = [];
+        var mems = [];
+
+        recs.forEach(rec => {
+          params.push(rec.param)
+          times.push(rec.utime + rec.stime)
+          mems.push(rec.mem)
+        });
+
+        dataTime.push({ x: params, y: times, type: 'scatter', name: method })
+        dataMem.push({ x: params, y: mems, type: 'scatter', mode: "lines", name: method })
+      });
+
+
+      const layoutTime = {
+        xaxis: { title: xName, type: "log" },
+        yaxis: { title: "Execution time (s)", type: "log" },
+        title: benchLabel + " (execution time)"
+      };
+
+      const layoutMem = {
+        xaxis: { title: xName, type: "log" },
+        yaxis: { title: "Space usage (kB)", type: "log" },
+        title: benchLabel + " (space usage)"
+      };
+
+      // Display using Plotly
+      Plotly.newPlot(bench + "TimePlot", dataTime, layoutTime, config);
+      Plotly.newPlot(bench + "MemPlot", dataMem, layoutMem, config);
+    }
+
+    plotsForBench("logistic", "Logistic map iteration", "n")
+    plotsForBench("manydigits1", "Many digits 1", "decimal digits")
+    plotsForBench("manydigits2", "Many digits 2", "decimal digits")
+    plotsForBench("manydigits3", "Many digits 3", "decimal digits")
+    plotsForBench("manydigits4", "Many digits 4", "decimal digits")
+    plotsForBench("manydigits5", "Many digits 5", "decimal digits")
+    // plotsForBench("manydigits6", "Many digits 6", "decimal digits")
+    plotsForBench("manydigits7", "Many digits 7", "decimal digits")
+
+  </script>
+
+</body>
+
+</html>
