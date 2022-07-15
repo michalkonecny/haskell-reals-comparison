@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="benchmarks/all.js"></script>
+
+<head>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  <script src="benchmarks/all.js"></script>
+</head>
 
 <body>
+  <h1>Benchmark results</h1>
+
+  <h2>Logistic map</h2>
+
+  <p>
+    \(n\) iterations of the logistic map (\(x\mapsto cx(1-x)\))
+  </p>
 
   <table style="width:100%">
     <tr>
@@ -14,6 +27,21 @@
         <div id="logisticMemPlot"></div>
       </td>
     </tr>
+  </table>
+
+  <h2>Selected 2005 "Many digits: friendly competition" tasks</h2>
+
+  <p>
+    The competition is documented in <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806">this
+      paper</a>.
+  </p>
+
+  <h3>Task C1</h3>
+
+  <table style="width:100%">
+    <tr>
+      <td colspan="2" style="text-align: center;">\(\sin(\tan(\cos(1)))\)</td>
+    </tr>
     <tr>
       <td>
         <div id="manydigits1TimePlot"></div>
@@ -21,6 +49,14 @@
       <td>
         <div id="manydigits1MemPlot"></div>
       </td>
+    </tr>
+  </table>
+
+  <h3>Task C2</h3>
+
+  <table style="width:100%">
+    <tr>
+      <td colspan="2" style="text-align: center;">\(\sqrt{\frac{e}{\pi}}\)</td>
     </tr>
     <tr>
       <td>
@@ -30,6 +66,14 @@
         <div id="manydigits2MemPlot"></div>
       </td>
     </tr>
+  </table>
+
+  <h3>Task C3</h3>
+
+  <table style="width:100%">
+    <tr>
+      <td colspan="2" style="text-align: center;">\(\sin\left((e+1)^3\right)\)</td>
+    </tr>
     <tr>
       <td>
         <div id="manydigits3TimePlot"></div>
@@ -37,6 +81,14 @@
       <td>
         <div id="manydigits3MemPlot"></div>
       </td>
+    </tr>
+  </table>
+
+  <h3>Task C4</h3>
+
+  <table style="width:100%">
+    <tr>
+      <td colspan="2" style="text-align: center;">\(e^{\pi \cdot \sqrt{2011}}\)</td>
     </tr>
     <tr>
       <td>
@@ -46,6 +98,14 @@
         <div id="manydigits4MemPlot"></div>
       </td>
     </tr>
+  </table>
+
+  <h3>Task C5</h3>
+
+  <table style="width:100%">
+    <tr>
+      <td colspan="2" style="text-align: center;">\(e^{e^{\sqrt{e}}}\)</td>
+    </tr>
     <tr>
       <td>
         <div id="manydigits5TimePlot"></div>
@@ -54,14 +114,14 @@
         <div id="manydigits5MemPlot"></div>
       </td>
     </tr>
-    <!-- <tr>
-      <td>
-        <div id="manydigits6TimePlot"></div>
-      </td>
-      <td>
-        <div id="manydigits6MemPlot"></div>
-      </td>
-    </tr> -->
+  </table>
+
+  <h3>Task C7</h3>
+
+  <table style="width:100%">
+    <tr>
+      <td colspan="2" style="text-align: center;">\(\pi^{1000}\)</td>
+    </tr>
     <tr>
       <td>
         <div id="manydigits7TimePlot"></div>
@@ -139,16 +199,34 @@
       Plotly.newPlot(bench + "MemPlot", dataMem, layoutMem, config);
     }
 
-    plotsForBench("logistic", "Logistic map iteration", "n")
-    plotsForBench("manydigits1", "Many digits 1", "decimal digits")
-    plotsForBench("manydigits2", "Many digits 2", "decimal digits")
-    plotsForBench("manydigits3", "Many digits 3", "decimal digits")
-    plotsForBench("manydigits4", "Many digits 4", "decimal digits")
-    plotsForBench("manydigits5", "Many digits 5", "decimal digits")
+    plotsForBench("logistic", "", 'n')
+    plotsForBench("manydigits1", "", "decimal digits")
+    plotsForBench("manydigits2", "", "decimal digits")
+    plotsForBench("manydigits3", "", "decimal digits")
+    plotsForBench("manydigits4", "", "decimal digits")
+    plotsForBench("manydigits5", "", "decimal digits")
     // plotsForBench("manydigits6", "Many digits 6", "decimal digits")
-    plotsForBench("manydigits7", "Many digits 7", "decimal digits")
+    plotsForBench("manydigits7", "", "decimal digits")
 
   </script>
+
+  <h2>Setup</h2>
+
+  <ul>
+    <li>
+      Hardware:
+      <!-- Lenovo T440p with 16GB RAM,
+Intel(R) Core(TM) i7-4710MQ CPU @ 2.50GHz running Ubuntu 20.04. -->
+      HP PC with 16GB RAM,
+      Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz
+    </li>
+    <li>
+      OS: Ubuntu 20.04
+    </li>
+    <li>
+      Compiler: ghc-9.0.2
+    </li>
+  </ul>
 
 </body>
 
