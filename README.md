@@ -17,104 +17,29 @@ _Everyone is welcome to contribute, especially authors of Haskell exact real sof
 | [CDAR](https://github.com/jensblanck/cdar) | __pure Haskell__ | on GitHub | well documented, based on [theory](http://cs.swan.ac.uk/%7Ecsjens/pdf/centred.pdf) | 2018-11-23 |
 | [CDAR-mBound](https://github.com/michalkonecny/cdar/tree/mBound) | __pure Haskell__ | on GitHub | CDAR + with a bound for mantissa size | 2019-03-20 |
 
-The source of the benchmark tasks: 
-* [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base/docs/Prelude.html#t:Floating) instance
-* [Tasks.MixedTypesNumOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/MixedTypesNumOps.hs) assuming instances of relevant classes in [MixedTypesNumPrelude](https://hackage.haskell.org/package/mixed-types-num/docs/MixedTypesNumPrelude.html)
-
-<!-- For some implementations, we used more than one evaluation strategy.  In particular, for AERN2 and ireal, we use the following strategies:
-
-* __Lazy Cauchy style__: Composing operations over real numbers using a lazy composition of (fast) Cauchy sequences, ie querying the number with certain accuracy 2^(-n) given by a natural number n. 
-
-* __iRRAM style__: Computing using interval arithmetic at a fixed precision for the centers of the intervals.  When the radius grows too large, stop and restart the computation with a higher precision.  Repeat until the result is sufficiently accurate.  This approach is usually a bit less convenient for programmers than lazy Cauchy real numbers since one usually needs to explicitly invoke the iterative process at the top level.
-
-CDAR uses an iRRAM style evaluation strategy internally and it cannot be easily switched to using a lazy Cauchy style.
-Nevertheless, in CDAR the iRRAM style evaluation is entirely hidden from the programmer, making it as convenient as lazy Cauchy style, 
-ie having a simple to use "real number" type. -->
-
 Note that "precision" in CDAR corresponds to absolute error bounds whereas "precision" in iRRAM, AERN2 and MPFR
 corresponds to relative error bounds (ie the mantissa size).  CDAR-mBound is a version amended with a mantissa size control.
 
+## Benchmark tasks source code
+
+* [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base/docs/Prelude.html#t:Floating) instance
+* [Tasks.MixedTypesNumOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/MixedTypesNumOps.hs) assuming instances of relevant classes in [MixedTypesNumPrelude](https://hackage.haskell.org/package/mixed-types-num/docs/MixedTypesNumPrelude.html)
+
+<!-- For some implementations, we used more than one evaluation strategy.  In particular, for AERN2 and ireal, we use the following strategies: -->
+
+For AERN2 we use two different evaluation strategies:
+
+* __Lazy Cauchy style__: Composing operations over real numbers using a lazy composition of (fast) Cauchy sequences, ie querying the number with certain accuracy 2^(-n) given by a natural number n. 
+
+* __Iterative style__: Computing using interval arithmetic at a fixed precision for the centers of the intervals.  When the radius grows too large, stop and restart the computation with a higher precision.  Repeat until the result is sufficiently accurate.  This approach is usually a bit less convenient for programmers than lazy Cauchy real numbers since one usually needs to explicitly invoke the iterative process at the top level.
+
+<!-- CDAR uses an iterative style evaluation strategy internally and it cannot be easily switched to using a lazy Cauchy style.
+Nevertheless, in CDAR the iRRAM style evaluation is entirely hidden from the programmer, making it as convenient as lazy Cauchy style, 
+ie having a simple to use "real number" type. -->
+
 ## Benchmark results
 
-### Selected 2005 "Many digits: friendly competition" tasks
-
-The competition is documented in [this paper](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806).
-
-#### Task C1
-
-![C1](http://latex.codecogs.com/gif.latex?\\sin(\\tan(\\cos(1))))
-
-| Execution time | Max RAM use |
-| :---: | :---: |
-| <img src="benchmarks/charts/manydigits1-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits1-fine-space.png?raw=true" width="400"> |
-
-Note that cdar_mBound and its dependencies are not currently featured in this benchmark.  
-This is due to an accuracy bug in cdar_mBound's sine and cosine.  Hopefully this will be fixed soon.
-
-#### Task C2
-
-![C2](http://latex.codecogs.com/gif.latex?\\sqrt{\\frac{e}{\\pi}})
-
-| Execution time | Max RAM use |
-| :---: | :---: |
-| <img src="benchmarks/charts/manydigits2-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits2-fine-space.png?raw=true" width="400"> |
-
-
-#### Task C3
-
-![C3](http://latex.codecogs.com/gif.latex?\\sin((e+1)^3))
-
-| Execution time | Max RAM use |
-| :---: | :---: |
-| <img src="benchmarks/charts/manydigits3-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits3-fine-space.png?raw=true" width="400"> |
-
-#### Task C4
-
-![C4](http://latex.codecogs.com/gif.latex?e^{\\pi \\cdot \\sqrt{2011}})
-
-| Execution time | Max RAM use |
-| :---: | :---: |
-| <img src="benchmarks/charts/manydigits4-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits4-fine-space.png?raw=true" width="400"> |
-
-#### Task C5
-
-![C5](http://latex.codecogs.com/gif.latex?e^{e^{\\sqrt{e}}})
-
-| Execution time | Max RAM use |
-| :---: | :---: |
-| <img src="benchmarks/charts/manydigits5-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits5-fine-space.png?raw=true" width="400"> |
-
-#### Task C7
-
-![C7](http://latex.codecogs.com/gif.latex?\\pi^{1000})
-
-| Execution time | Max RAM use |
-| :---: | :---: |
-| <img src="benchmarks/charts/manydigits7-fine-time.png?raw=true" width="400"> | <img src="benchmarks/charts/manydigits7-fine-space.png?raw=true" width="400"> |
-
-
-
-
-
-### Logistic map iteration
-
-Results of the "logistic" benchmark, running n iterations of the logistic map with c=3.82 and x0=0.125.
-
-| Implementation | strategy | n=100 | n=316 | n=1000 | n=3160 | n=10000  | n=31600 | n=100000 |
-| -------- | ------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| aern2 | Cauchy seq. | 0.02 s | 0.07 s / 10&nbsp;MB | 0.23 s  / 15&nbsp;MB  | 0.86 s / 37&nbsp;MB | 3.9 s / 243&nbsp;MB |  23 s / 900&nbsp;MB | 193 s / 7.8&nbsp;GB |
-| aern2-CDAR | Cauchy seq. | 0.03 s | 0.12 s / 9&nbsp;MB | 0.42 s  / 14&nbsp;MB  | 1.68 s / 39&nbsp;MB | 10.3 s / 146&nbsp;MB |  111 s / 750&nbsp;MB | 1604 s / 5.2&nbsp;GB |
-| aern2 | iRRAM-style | 0.01 s | 0.02 s / 7&nbsp;MB  | 0.05 s  / 7&nbsp;MB  | 0.44 s  / 7&nbsp;MB  | 2.3 s /  7&nbsp;MB  | 43 s /  11&nbsp;MB | 903 s / 15&nbsp;MB |
-| aern2-CDAR | iRRAM-style | 0.01 s | 0.03 s / 7&nbsp;MB  | 0.10 s  / 7&nbsp;MB  | 0.63 s  / 7&nbsp;MB  | 2.7 s /  8&nbsp;MB  | 46 s /  10&nbsp;MB | 903 s / 15&nbsp;MB |
-| CDAR | iRRAM-style | 0.01 s | 0.01 s / 7&nbsp;MB | 0.02 s  / 9&nbsp;MB  | 0.1 s / 13&nbsp;MB | 1.24 s / 45&nbsp;MB |  17 s / 95&nbsp;MB | 272 s / 195&nbsp;MB |
-| CDAR-mBound | iRRAM-style | 0.01 s | 0.01 s / 7&nbsp;MB | 0.02 s  / 9&nbsp;MB  | 0.2 s / 14&nbsp;MB | 1.4 s / 43&nbsp;MB |  18 s / 97&nbsp;MB | 283 s / 220&nbsp;MB |
-| ireal | iRRAM-style | 0.01 s | 0.01 s / 6&nbsp;MB  | 0.03 s  / 6&nbsp;MB  | 0.12 s  / 6&nbsp;MB  | 2.4 s / 7&nbsp;MB   | 53 s / 8&nbsp;MB   | 375 s / 9&nbsp;MB   |
-
-The charts show a few more data points:
-
-| Execution time | Max RAM use |
-| :---: | :---: |
-| <img src="benchmarks/charts/logistic-time.png?raw=true" width="400"> | <img src="benchmarks/charts/logistic-space.png?raw=true" width="400"> |
+[click here](http://michalkonecny.github.io/haskell-reals-comparison/results.html)
 
 ## TODO
 * include package [exact-real](https://hackage.haskell.org/package/exact-real)

@@ -2,7 +2,7 @@ name:                haskell-reals-comparison
 version:             0.1.1.0
 github:              "michalkonecny/haskell-reals-comparison"
 license:             BSD3
-author:              "Michal Konecny"
+author:              "Michal Konecny, Björn von Sydow"
 maintainer:          "mikkonecny@gmail.com"
 copyright:           "2015-2022 Michal Konecny"
 

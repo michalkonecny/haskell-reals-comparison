@@ -11,7 +11,7 @@ description:    Please see the README on GitHub at <https://github.com/michalkon
 category:       Math
 homepage:       https://github.com/michalkonecny/haskell-reals-comparison#readme
 bug-reports:    https://github.com/michalkonecny/haskell-reals-comparison/issues
-author:         Michal Konecny
+author:         Michal Konecny, Björn von Sydow
 maintainer:     mikkonecny@gmail.com
 copyright:      2015-2022 Michal Konecny
 license:        BSD3
