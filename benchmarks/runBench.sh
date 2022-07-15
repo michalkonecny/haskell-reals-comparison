@@ -154,7 +154,7 @@ function manydigitsAllMethodsFine
   steps10000="10000 13300 17700 23700 31600 42100 56200 74900"
 
   method_cdar_bparamss="$steps100 $steps1000 $steps10000 100000";
-  method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000"; # 100000";
+  method_aern2_CR_bparamss="$steps100 $steps1000 $steps10000 100000";
   # method_ireal_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
   method_aern2_MP_bparamss="$steps100 $steps1000 $steps10000 100000";
   #method_cdar_bparamss="$steps100 $steps1000 10000";

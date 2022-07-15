@@ -5,17 +5,17 @@ aern2_CR: [181.33130360854569351505757451... ± ~0.0000 ~2^(-1414)]
 	Command being timed: "haskell-reals-comparison manydigits5 421 aern2_CR 100"
 	User time (seconds): 0.01
 	System time (seconds): 0.00
-	Percent of CPU this job got: 100%
+	Percent of CPU this job got: 94%
 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 8704
+	Maximum resident set size (kbytes): 8540
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 725
-	Voluntary context switches: 0
+	Minor (reclaiming a frame) page faults: 724
+	Voluntary context switches: 1
 	Involuntary context switches: 0
 	Swaps: 0
 	File system inputs: 0

@@ -6,35 +6,22 @@ _This is ongoing work._
 
 _Everyone is welcome to contribute, especially authors of Haskell exact real software._
 
-## Benchmark setup
-
-The benchmark timings are obtained on a
-<!-- Dell Inspiron 15R with 16GB RAM,
-Intel(R) Core(TM) i7-3632QM CPU @ 2.20GHz running Ubuntu 14.04. -->
-<!-- Lenovo T440p with 16GB RAM,
-Intel(R) Core(TM) i7-4710MQ CPU @ 2.50GHz running Ubuntu 14.04. -->
-HP PC with 16GB RAM,
-Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz running Ubuntu 18.04.
-
-The benchmarks have been compiled using ghc-8.4.4.
-
 <!-- Each benchmark has been executed repeatedly until 3 consecutive times the results have fluctuated for less than 5%. -->
 
 ## Implementations
 
 | Implementation | Notable dependencies | Status | Reliability | Release date of the version used here |
 | ----- | ----- | ----- | ----- | ----- |
-| [ireal](https://hackage.haskell.org/package/ireal) | __pure Haskell__ | fairly complete, on Hackage | well tested | 2015-10-31 |
-| [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [rounded (MPFR)](http://hackage.haskell.org/package/rounded) | fairly complete, on Hackage | well tested | 2019-03-20 |
-| [aern2-real-CDAR](https://github.com/michalkonecny/aern2/aern2-real) | [CDAR-mBound](https://github.com/michalkonecny/cdar/tree/mBound) | fairly complete, on Hackage | well tested | 2019-03-20 |
+| [ireal](https://hackage.haskell.org/package/ireal) | __pure Haskell__ | fairly complete, on Hackage | well tested | (currently not compiling) |
+| [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [rounded (MPFR)](http://hackage.haskell.org/package/rounded) | fairly complete, on Hackage | well tested | 2022-07-13 |
 | [CDAR](https://github.com/jensblanck/cdar) | __pure Haskell__ | on GitHub | well documented, based on [theory](http://cs.swan.ac.uk/%7Ecsjens/pdf/centred.pdf) | 2018-11-23 |
-| [CDAR-mBound](https://github.com/michalkonecny/cdar/tree/mBound) | __pure Haskell__ | on GitHub | CDAR + with a bit-size bound for midpoint | 2019-03-20 |
+| [CDAR-mBound](https://github.com/michalkonecny/cdar/tree/mBound) | __pure Haskell__ | on GitHub | CDAR + with a bound for mantissa size | 2019-03-20 |
 
 The source of the benchmark tasks: 
 * [Tasks.PreludeOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/PreludeOps.hs) assuming a Prelude [Floating](https://hackage.haskell.org/package/base/docs/Prelude.html#t:Floating) instance
 * [Tasks.MixedTypesNumOps](https://github.com/michalkonecny/haskell-reals-comparison/blob/master/src/Tasks/MixedTypesNumOps.hs) assuming instances of relevant classes in [MixedTypesNumPrelude](https://hackage.haskell.org/package/mixed-types-num/docs/MixedTypesNumPrelude.html)
 
-For some implementations, we used more than one evaluation strategy.  In particular, for AERN2 and ireal, we use the following strategies:
+<!-- For some implementations, we used more than one evaluation strategy.  In particular, for AERN2 and ireal, we use the following strategies:
 
 * __Lazy Cauchy style__: Composing operations over real numbers using a lazy composition of (fast) Cauchy sequences, ie querying the number with certain accuracy 2^(-n) given by a natural number n. 
 
@@ -42,10 +29,10 @@ For some implementations, we used more than one evaluation strategy.  In particu
 
 CDAR uses an iRRAM style evaluation strategy internally and it cannot be easily switched to using a lazy Cauchy style.
 Nevertheless, in CDAR the iRRAM style evaluation is entirely hidden from the programmer, making it as convenient as lazy Cauchy style, 
-ie having a simple to use "real number" type.
+ie having a simple to use "real number" type. -->
 
-Note that "precision" in CDAR corresponds to absolute errors whereas "precision" in iRRAM, AERN2 and MPFR
-corresponds to relative errors.  CDAR-mBound is a version with an additional floating-point precision control.
+Note that "precision" in CDAR corresponds to absolute error bounds whereas "precision" in iRRAM, AERN2 and MPFR
+corresponds to relative error bounds (ie the mantissa size).  CDAR-mBound is a version amended with a mantissa size control.
 
 ## Benchmark results
 

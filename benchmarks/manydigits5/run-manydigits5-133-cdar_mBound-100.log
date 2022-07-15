@@ -3,20 +3,20 @@ Problem C5 with accuracy of 133 decimal digits
  (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806)
 cdar_mBound: 181.331303608545693515057574512653983808863692478514759279439270013181259219081865415534165821657032932510874309669138636737590994634946~
 	Command being timed: "haskell-reals-comparison manydigits5 133 cdar_mBound 100"
-	User time (seconds): 0.00
+	User time (seconds): 0.01
 	System time (seconds): 0.00
-	Percent of CPU this job got: 90%
+	Percent of CPU this job got: 100%
 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 6772
+	Maximum resident set size (kbytes): 6748
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 531
+	Minor (reclaiming a frame) page faults: 533
 	Voluntary context switches: 1
-	Involuntary context switches: 0
+	Involuntary context switches: 1
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 8

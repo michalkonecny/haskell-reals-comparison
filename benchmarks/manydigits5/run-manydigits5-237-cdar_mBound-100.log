@@ -11,12 +11,12 @@ cdar_mBound: 181.331303608545693515057574512653983808863692478514759279439270013
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 7164
+	Maximum resident set size (kbytes): 7000
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 596
+	Minor (reclaiming a frame) page faults: 593
 	Voluntary context switches: 1
-	Involuntary context switches: 3
+	Involuntary context switches: 0
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 8

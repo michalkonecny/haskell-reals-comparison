@@ -11,7 +11,7 @@ aern2_CR: [0.93019136710263285866812462... ± ~7.5878e-145 ~2^(-478)]
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 7532
+	Maximum resident set size (kbytes): 7336
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
 	Minor (reclaiming a frame) page faults: 432

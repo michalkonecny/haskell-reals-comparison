@@ -3,7 +3,7 @@ Problem C2 with accuracy of 1000 decimal digits
  (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806)
 aern2_CR: [0.93019136710263285866812462... ± ~0.0000 ~2^(-5180)]
 	Command being timed: "haskell-reals-comparison manydigits2 1000 aern2_CR 100"
-	User time (seconds): 0.01
+	User time (seconds): 0.00
 	System time (seconds): 0.00
 	Percent of CPU this job got: 100%
 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01
@@ -11,12 +11,12 @@ aern2_CR: [0.93019136710263285866812462... ± ~0.0000 ~2^(-5180)]
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 8412
+	Maximum resident set size (kbytes): 8112
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 595
+	Minor (reclaiming a frame) page faults: 593
 	Voluntary context switches: 1
-	Involuntary context switches: 1
+	Involuntary context switches: 0
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 8

@@ -5,16 +5,16 @@ cdar_mBound: 0.90949524105726624718554721945217426889396524221380801087995990780
 	Command being timed: "haskell-reals-comparison manydigits3 1330 cdar_mBound 100"
 	User time (seconds): 0.01
 	System time (seconds): 0.00
-	Percent of CPU this job got: 100%
+	Percent of CPU this job got: 93%
 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.01
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 6972
+	Maximum resident set size (kbytes): 6648
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 548
+	Minor (reclaiming a frame) page faults: 544
 	Voluntary context switches: 1
 	Involuntary context switches: 0
 	Swaps: 0

@@ -11,12 +11,12 @@ aern2_CR: [0.90949524105726624718554721... ± ~2.0345e-262 ~2^(-869)]
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 7660
+	Maximum resident set size (kbytes): 7436
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 519
+	Minor (reclaiming a frame) page faults: 515
 	Voluntary context switches: 1
-	Involuntary context switches: 1
+	Involuntary context switches: 0
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 8
