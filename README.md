@@ -14,8 +14,8 @@ _Everyone is welcome to contribute, especially authors of Haskell exact real sof
 | ----- | ----- | ----- | ----- | ----- |
 | [ireal](https://hackage.haskell.org/package/ireal) | __pure Haskell__ | fairly complete, on Hackage | well tested | (currently not compiling) |
 | [aern2-real](https://github.com/michalkonecny/aern2/aern2-real) | [rounded (MPFR)](http://hackage.haskell.org/package/rounded) | fairly complete, on Hackage | well tested | 2022-07-13 |
-| [CDAR](https://github.com/jensblanck/cdar) | __pure Haskell__ | on GitHub | well documented, based on [theory](http://cs.swan.ac.uk/%7Ecsjens/pdf/centred.pdf) | 2018-11-23 |
-| [CDAR-mBound](https://github.com/michalkonecny/cdar/tree/mBound) | __pure Haskell__ | on GitHub | CDAR + with a bound for mantissa size | 2019-03-20 |
+| [CDAR](https://github.com/jensblanck/cdar) | __pure Haskell__ | on GitHub | well documented, based on [theory](http://cs.swan.ac.uk/%7Ecsjens/pdf/centred.pdf) | (not used here) |
+| [CDAR-mBound](https://github.com/michalkonecny/cdar/tree/mBound) | __pure Haskell__ | on GitHub | CDAR + with a bound for mantissa size | 2021-06-04 |
 
 Note that "precision" in CDAR corresponds to absolute error bounds whereas "precision" in iRRAM, AERN2 and MPFR
 corresponds to relative error bounds (ie the mantissa size).  CDAR-mBound is a version amended with a mantissa size control.
