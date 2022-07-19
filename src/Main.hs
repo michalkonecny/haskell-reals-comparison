@@ -68,7 +68,7 @@ bench benchS benchParams implS ac =
                       show ((TP.taskLogistic n :: AERN2Real.CReal) AERN2Real.? (ac))
                     "aern2_MP_preludeOps" -> show (taskLogisticMP_TP n ac)
                     "aern2_MP" -> show (taskLogisticMP_TA n ac)
-                    "aern2_MP1" -> show (taskLogisticMP1_TA n ac)
+                    "aern2cm_MP1" -> show (taskLogisticMP1_TA n ac)
                     -- "aern2_MP2" -> show (taskLogisticMP2_TA n ac)
                     "aern2_CR" ->
                       show (taskLogisticCRpureArrow_TA n AERN2Real.? (ac))
@@ -89,7 +89,7 @@ bench benchS benchParams implS ac =
                 case implS of
                     "cdar_mBound" -> CDAR.showA . CDAR.limitSize (int acN) . CDAR.require (int acN) $ taskPrelude
                     "aern2_CR" -> show $ (taskPrelude :: AERN2Real.CReal) AERN2Real.? (acNA)
-                    "aern2_MP" -> show $ taskMBfromTask acNA task
+                    "aern2cm_MP" -> show $ taskMBfromTask acNA task
                     -- "ireal_MP" -> IReal.showIReal (int acND) $ taskIRealfromTask acNA task
                     _ -> error $ "unknown implementation: " ++ implS
             _ -> error ""

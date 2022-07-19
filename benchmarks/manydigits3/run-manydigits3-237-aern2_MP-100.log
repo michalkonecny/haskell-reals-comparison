@@ -11,7 +11,7 @@ aern2_MP: [0.90949524105726624718554721... ± ~3.6118e-250 ~2^(-828)]
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 7348
+	Maximum resident set size (kbytes): 7648
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
 	Minor (reclaiming a frame) page faults: 514

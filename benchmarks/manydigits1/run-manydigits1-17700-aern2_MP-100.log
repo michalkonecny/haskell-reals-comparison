@@ -3,20 +3,20 @@ Problem C1 with accuracy of 17700 decimal digits
  (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.307.7806)
 aern2_MP: [0.56451092986195980582768640... ± ~0.0000 ~2^(-58803)]
 	Command being timed: "haskell-reals-comparison manydigits1 17700 aern2_MP 100"
-	User time (seconds): 1.16
+	User time (seconds): 1.34
 	System time (seconds): 0.00
-	Percent of CPU this job got: 100%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.17
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.34
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 11580
+	Maximum resident set size (kbytes): 11528
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 1571
+	Minor (reclaiming a frame) page faults: 1517
 	Voluntary context switches: 1
-	Involuntary context switches: 3
+	Involuntary context switches: 10
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 8
